@@ -54,22 +54,31 @@
                     margin-right: 6px
 
     .sub-menu
-        width: 350px
-        left: -30px
-        color: white
-        background: black
-        padding: 40px 30px 0 30px
-        margin-top: -10px
+        width: 320px
+        color: #fff
+        background: #000
+
+        // To reverse default padding bottom behavior on bootstrap menu.
+        padding-bottom: 0px
+        margin-top: 0px
+
+        li
+            a
+                display: block
+
+            &:hover
+                background-color: #2d2d2d
+
+            &:active
+                background-color: #444
 
         .title
-            font-size: 14px
             color: white
             margin: 0
 
         .sub-title
-            font-size: 14px
-            color: #999
-            margin: 0 0 30px 0
+            font-size: $font-small
+            color: $light-font
 
     li.dropdown:hover
         > ul.dropdown-menu

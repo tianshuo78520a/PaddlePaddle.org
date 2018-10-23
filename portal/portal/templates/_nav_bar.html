@@ -33,6 +33,9 @@
             <ul class="navbar-nav">
                 <!-- Contact us for Chinese version only -->
                 {% if LANGUAGE_CODE == 'zh' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/documentation/docs/zh/{{ CURRENT_DOCS_VERSION }}/user_guides/models/index.html">模型库</a>
+                </li>
                 <li>
                     <a class="nav-link" data-toggle="modal" data-target="#feedbackModal">联系我们</a>
                 </li>

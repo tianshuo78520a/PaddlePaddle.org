@@ -47,7 +47,7 @@ On the other hand, if you are only improving the text/media content (since you d
     Pass the cloned FluidDoc directory:
 
     ```bash
-    ./runserver --paddle <path_to_fluiddoc_dir> --book <path_to_book_dir>
+    ./runserver --paddle <path_to_fluiddoc_dir>
     ```
 
     Open up your browser and navigate to [http://localhost:8000](http://localhost:8000).

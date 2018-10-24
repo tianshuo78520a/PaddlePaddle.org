@@ -45,7 +45,7 @@ urlpatterns = [
     url(r'^zh', views.zh_home_root, name='zh_home'),
     url(r'^en', views.en_home_root, name='en_home'),
 
-    url(r'^solutions$', views.solutions_root, name='solution'),
+    url(r'^suite', views.suite_root, name='suite'),
 
     # ---------------
     # BLOG URLS

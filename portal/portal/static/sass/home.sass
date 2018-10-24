@@ -1,5 +1,7 @@
 @import "_common-home.sass"
 
+$carousel-banner-height: 468px
+
 .home
     .btn
         height: 78px
@@ -23,21 +25,16 @@
                 background: linear-gradient(to left, $accent-color, $accent-color)
 
     .carousel-banners
-        height: 468px
+        height: $carousel-banner-height
 
         .carousel-item-container
-            height: 468px
-            background-image: url(/static/images/pp-suite-banner.png)
+            height: $carousel-banner-height
+            background-image: url('/static/images/pp-suite-banner.png')
             background-position: 0% 0%
             background-size: cover
 
-            h1
-                text-align: left
-                color: #fff
-                font-size: 48px
-
         .hero
-            height: 468px
+            height: $carousel-banner-height
             background: linear-gradient(40deg, rgba(59, 133, 245, 0.2), transparent)
 
             p
@@ -554,7 +551,7 @@
         background: #5a9bff
         color: white
         right: 0px
-        top: 45%
+        bottom: 20%
         position: fixed
 
         .qr_code
@@ -564,8 +561,8 @@
             width: 150px
             padding-top: 10px
             background: black
-            display: none
-            transition: all .15s ease-in-out
+            opacity: 0
+            transition: opacity .15s ease-in-out
 
             p
                 font-size: 12px
@@ -577,7 +574,7 @@
                 margin: 15px
 
         .show
-            display: block
+            opacity: 1
 
         .feedback_item
             position: relative

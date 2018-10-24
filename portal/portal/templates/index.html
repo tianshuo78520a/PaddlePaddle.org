@@ -16,12 +16,12 @@
 
 
     <section class="carousel-banners">
-        <div id="carouselControls" class="carousel slide" data-ride="carousel">
+        <div id="carousel-controls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="hero py-5">
                         <div class="container">
-                            <div class="tag-line mb-4 pt-5">
+                            <div class="tag-line mb-4 pt-{% if LANGUAGE_CODE == 'zh' %}5{% else %}2{% endif %}">
                                 {% blocktrans %}An easy-to-use, easy-to-learn&nbsp;<br class="br"/>deep learning platform{% endblocktrans %}
                             </div>
                             <p class="mb-5">{% blocktrans %}An open-source deep learning platform with a&nbsp;<br class="br"/>simple API, trusted by the world’s leading AI teams{% endblocktrans %}</p>
@@ -101,7 +101,7 @@
                 <div class="carousel-item">
                     <div class="carousel-item-container py-5">
                         <div class="container">
-                            <h1>Place Holder</h1>
+                            <div class="tag-line">Place Holder</div>
                         </div>
                     </div>
                 </div>
@@ -109,18 +109,18 @@
                 <div class="carousel-item">
                     <div class="carousel-item-container py-5">
                         <div class="container">
-                            <h1>Place Holder 2</h1>
+                            <div class="tag-line">Place Holder 2</div>
                         </div>
                     </div>
                 </div>
                 {% endif %}
             </div>
             {% if LANGUAGE_CODE == 'zh' %}
-            <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#carousel-controls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#carousel-controls" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>

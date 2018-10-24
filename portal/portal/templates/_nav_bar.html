@@ -25,7 +25,12 @@
                 <li class="nav-item{% if '/documentation' in request.path %} active{% endif %}">
                     <a class="nav-link" href="/documentation/{% if LANGUAGE_CODE != 'zh' %}en{% else %}zh{% endif %}"{% if settings.ENV != 'production' and settings.ENV != 'staging' %} onclick="return showFullpageSpinnerForContentId('documentation');"{% endif %}>{% trans "Documentation" %}<span class="sr-only">(current)</span></a>
                 </li>
+                {% if LANGUAGE_CODE == 'zh' %}
 
+                <li class="nav-item">
+                    <a class="nav-link" href="/documentation/docs/zh/{{ CURRENT_DOCS_VERSION }}/user_guides/models/index.html">模型库</a>
+                </li>
+                {% endif %}
                 <li>
                     <a class="nav-link" href="/about_{% if LANGUAGE_CODE != 'zh' %}en{% else %}cn{% endif %}.html">{% trans "About" %}</a>
                 </li>
@@ -33,9 +38,6 @@
             <ul class="navbar-nav">
                 <!-- Contact us for Chinese version only -->
                 {% if LANGUAGE_CODE == 'zh' %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/documentation/docs/zh/{{ CURRENT_DOCS_VERSION }}/user_guides/models/index.html">模型库</a>
-                </li>
                 <li>
                     <a class="nav-link" data-toggle="modal" data-target="#feedbackModal">联系我们</a>
                 </li>

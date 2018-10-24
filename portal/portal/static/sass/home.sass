@@ -1,6 +1,6 @@
 @import "_common-home.sass"
 
-$carousel-banner-height: 468px
+$hero-carousel-height: 468px
 
 .home
     .btn
@@ -24,17 +24,17 @@ $carousel-banner-height: 468px
             &:hover
                 background: linear-gradient(to left, $accent-color, $accent-color)
 
-    .carousel-banners
-        height: $carousel-banner-height
+    .hero-carousel
+        height: $hero-carousel-height
 
         .carousel-item-container
-            height: $carousel-banner-height
+            height: $hero-carousel-height
             background-image: url('/static/images/pp-suite-banner.png')
             background-position: 0% 0%
             background-size: cover
 
-        .hero
-            height: $carousel-banner-height
+        .ppo-banner
+            height: $hero-carousel-height
             background: linear-gradient(40deg, rgba(59, 133, 245, 0.2), transparent)
 
             p
@@ -738,11 +738,11 @@ $carousel-banner-height: 468px
         hr
             display: none
 
-        .carousel-banners
+        .hero-carousel
             p
                 font-size: $font-xlarge
 
-            .hero
+            .ppo-banner
                 .dot-area
                     display: inline
 

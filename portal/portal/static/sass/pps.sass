@@ -16,17 +16,22 @@ $description-color: #999999
             text-align: center
 
     .hero
-        background: blue
         background-image: url('/static/images/pp-suite-banner.png')
         background-repeat: no-repeat
         background-size: cover
-        padding-top: 50px
+        padding-top: 48px
         height: $hero-carousel-height
+        padding-left: 15%
+        padding-right: 15%
 
         color: #fff
 
+        .tag-line
+            margin-top: 1em
+
         .sub-title
             color: #fff
+            font-size: $font-xlarge
 
         .btn
             color: #fff
@@ -158,3 +163,15 @@ $description-color: #999999
         .service-desc
             h3
                 color: $title-color
+
+@media (max-width: 1200px)
+    .pps-home
+        .hero
+            .tag-line
+                margin-top: 0
+                font-size: $font-xxlarge
+                line-height: normal
+
+            .sub-title
+                font-size: $font-medium
+

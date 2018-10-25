@@ -383,12 +383,12 @@
     updateIndicator();
 
     // Create section: target-offset map
-    var sections = {}
+    var sections = {};
     quickLinks.each(function(index, value){
             var $el = $(value);
             var anchorId = $el.attr('href');
             var target = $(anchorId).offset().top - 300;
-            sections[$el.attr('href')] = target
+            sections[$el.attr('href')] = target;
     });
 
     // Base on the scroll offset, update the selected quick link
@@ -396,15 +396,15 @@
         position = $(window).scrollTop();
         for (var section in sections) {
             if (position >= sections[section]) {
-                quickLinks.removeClass("selected")
+                quickLinks.removeClass("selected");
                 $('.scroll-link[href="' + section + '"]').addClass('selected');
-                updateIndicator()
+                updateIndicator();
             }
         }
     }
 
     // Only update the selected quick link when the scroll event settles
-    var selectedQuickLinkTimer
+    var selectedQuickLinkTimer;
     $(window).scroll(function(){
         clearTimeout(selectedQuickLinkTimer);
         selectedQuickLinkTimer = setTimeout(updateSelectedQuickLink, 100);

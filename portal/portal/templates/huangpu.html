@@ -1,0 +1,105 @@
+{% extends "_base_nav.html" %}
+{% block post_content %}
+{% load app_tags %}
+
+<link href="/static/stylesheets/huangpu.css?{% server_start_time %}" media="screen, projection" rel="stylesheet"
+      type="text/css"/>
+
+{% endblock %}
+{% block content %}
+
+<div class="contentInner">
+	<!--project-计划-->
+	<div class="project">
+		<div class="projectLeft">
+			<img src="/static/images/huangpu/image1.png"/>
+		</div>
+		<div class="projectRight">
+			<img src="/static/images/huangpu/huangpu.png"/>
+		</div>
+		<div class="projectLogo">
+			<img src="/static/images/huangpu/logo.png"/>
+		</div>
+		<div class="projectText">
+			<p>-深度学习架构师俱乐部-</p>
+			<a href="https://iwenjuan.baidu.com/?code=e71faf">
+				<span>快速报名</span>
+				<span>-首期仅限20席-</span>
+			</a>
+		</div>
+	</div>
+	<div class="timePadding"></div>
+	<!--time-时间-->
+	<div class="time">
+		<div class="timeLeft">
+			<span>11.1</span>
+			<span>启动 </span>
+			<span>首期招募</span>
+		</div>
+		<div class="timeCen">
+			<span>12.20</span>
+			<span>公布首期 </span>
+			<span>入选名单</span>
+		</div>
+		<div class="timeRight">
+			<span>1.15</span>
+			<span>首期  </span>
+			<span>启航仪式</span>
+		</div>
+
+	</div>
+	<!--interflow-交流-->
+	<div class="interflow">
+		<!--left-->
+		<div class="interflow-left">
+			<div class="interflowLeft">
+				<img src="/static/images/huangpu/cen_1.png"/>
+				<p>培养产业深度学习</p>
+				<p>高端人才</p>
+			</div>
+		</div>
+		<!--cen-->
+		<div class="interflow-cen">
+			<div class="interflowCen">
+				<img src="/static/images/huangpu/cen_2.png"/>
+				<p>助力産业深度学习</p>
+				<p>创新应用落地</p>
+			</div>
+		</div>
+		<!--right-->
+		<div class="interflow-right">
+			<div class="interflowRight">
+				<img src="../static/images/huangpu/cen_3.png"/>
+				<p>搭建国内最有影响力的深度学习</p>
+				<p>技术人才交流圈 </p>
+			</div>
+		</div>
+	</div>
+	<div class="pathPadding"></div>
+	<!-- path-流程-->
+	<div class="path">
+		<!--left-->
+		<div class="pathLeft">
+			<h3>与百度架构师深入交流</h3>
+			<p>优选百度大脑、PaddlePaddle等深度学习相关业务架构师20位，每季度定期线下私享会，永不断电的线上互动，去中心化的多对多交流。</p>
+		</div>
+		<!--center-->
+		<div class="pathCen">
+			<h3>全方位支持企业创新项目</h3>
+			<p>入选企业将获专业PMO支持，全程推进项目落地，百度多业务资源对接，丰富的市场传播推广，强力支持企业创新落地应用。</p>
+		</div>
+		<!--right-->
+		<div class="pathRight">
+			<h3>丰富形式持续互动</h3>
+			<p>前瞻的技术思维与观点碰撞，强竞争力的深度学习课程体系，亲密互动共同成长，搭建国内深度学习高端技术人才交流圈。</p>
+		</div>
+	</div>
+	<div class="applyPadding"></div>
+	<!--apply-报名-->
+	<div class="apply">
+		<img src="/static/images/huangpu/EWM.png"/>
+		<p>-扫码报名-</p>
+	</div>
+</div>
+
+{% endblock %}

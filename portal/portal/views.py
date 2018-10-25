@@ -32,6 +32,7 @@ from django.core.cache import cache
 from django.http import JsonResponse
 from django import forms
 import requests
+from user_agents import parse
 
 from portal import menu_helper, portal_helper, url_helper
 from deploy import transform
@@ -357,9 +358,26 @@ def zh_home_root(request):
     portal_helper.set_preferred_language(request, None, 'zh')
     return render(request, 'index.html')
 
+
 def suite_root(request):
     portal_helper.set_preferred_language(request, None, 'zh')
     return render(request, 'pps.html')
+
+
+def huangpu_root(request):
+    portal_helper.set_preferred_language(request, None, 'zh')
+
+    is_mobile = parse(request.META.get('HTTP_USER_AGENT', '')).is_mobile
+
+    return render(
+        request,
+        'huangpu-mobile.html' if is_mobile else 'huangpu.html',
+        {
+            'title': '黄埔计划延展图',
+            'wrapper_class': 'huangpu-mobile' if is_mobile else None
+        }
+    )
+
 
 def about_en(request):
     portal_helper.set_preferred_language(request, None, 'en')

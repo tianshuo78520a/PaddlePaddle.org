@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         {% if content_id == None or content_id == '' %}
-        <title>{% trans "PaddlePaddle - Train and deploy deep learning at scale"%}</title>
+        <title>{% if title %}{{ title }}{% else %}{% trans "PaddlePaddle - Train and deploy deep learning at scale"%}{% endif %}</title>
         {% else %}
         <title>PaddlePaddle - {{ content_id|title }} </title>
         {% endif %}
@@ -38,7 +38,7 @@
         </script>
     </head>
 
-    <body>
+    <body{% if wrapper_class %} class="{{ wrapper_class }}"{% endif %}>
         {% block pre_content %}{% endblock %}
 
         {% block content_root %}

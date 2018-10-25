@@ -16,7 +16,7 @@
 
 
     <section class="hero-carousel">
-        <div id="carousel-controls" class="carousel slide" data-ride="carousel">
+        <div id="carousel-controls" class="carousel slide" data-ride="carousel" data-interval="1000000">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="intro-banner py-5">
@@ -99,17 +99,21 @@
 
                 {% if LANGUAGE_CODE == 'zh' %}
                 <div class="carousel-item">
-                    <div class="pps-banner py-5">
-                        <div class="container py-5 pl-8">
-                            <div class="tag-line pt-5">PaddlePaddle PPS</div>
-                            <p class="sub-title py-4">PPS是一个深度学习全功能套件，<br/>能够满足深度学习开发的多种需求</p>
+                    <a href="/suite">
+                        <div class="pps-banner py-5">
+                            <div class="container py-5">
+                                <div class="tag-line pt-5">PaddlePaddle Suite</div>
+                                <p class="sub-title py-4">PPS是面向工业应用的国际领先的深度学习全功能套件。支持企业和开发者自主构建基于深度学习的智能应用，助力企业优化运营效率，提升经营水平，全面实现AI时代的业务转型</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="carousel-item">
-                    <div class="huangpu-banner py-5">
-                    </div>
+                    <a href="/huangpu">
+                        <div class="huangpu-banner py-5">
+                        </div>
+                    </a>
                 </div>
                 {% endif %}
             </div>

@@ -356,9 +356,7 @@
         var selectedItem = $('.scroll-link.selected');
 
         var style = {'margin-left': selectedItem.offset().left,
-                     'width': selectedItem.parent('.link-body').width(),
-                     'transition': '.3s ease-in-out',
-                     'display': 'block'};
+                     'width': selectedItem.parent('.link-body').width()};
 
         $('#indicator').css(style);
     }
@@ -381,6 +379,7 @@
 
     // Bring the indicator to the right place
     updateIndicator();
+    $('#indicator').addClass('slider');
 
     // Create section: target-offset map
     var sections = {};

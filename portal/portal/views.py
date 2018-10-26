@@ -84,7 +84,7 @@ def change_lang(request):
     elif path in ['/documentation/models', '/documentation/mobile']:
         # There is no information on lang and version. The only way is to redirect to the documentation home
         response = redirect('/documentation/%s' % lang)
-    elif not path in ['/', '/en', '/zh', '/search', '/suite']:
+    elif not path in ['/', '/en', '/zh', '/search', '/suite', '/huangpu']:
         # If not for homepage, its regular documentations.
         response = _find_matching_equivalent_page_for(path, request, lang)
     else:

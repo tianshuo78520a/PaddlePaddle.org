@@ -333,28 +333,18 @@ body.huangpu-mobile #content {
 	background-size: 100% 100%;
 }
 #scrollWrap .logo{
-	/*position: absolute;
-	top:1.5rem;
-	right:0.74rem;*/
-    margin-top: 1em;
-    margin-right: 0.75em;
-    margin-left: auto;
+	margin: 1em 0.75em 0.2em auto;
 	width: 1.41em;
 	height: 0.36em;
 }
 .hpjx{
-	/*position: absolute;
-	top:2rem;
-	right:0.75rem;*/
     margin-right: 0.75em;
     margin-left: auto;
 	width: 3.27em;
 	height: 0.77em;
 }
 .text{
-	position: absolute;
-	top:2.35em;
-	right:0.78em;
+	margin: 0.2rem 0.78rem auto auto;
 	width: 4.3em;
 	height: auto;
 }
@@ -373,23 +363,23 @@ body.huangpu-mobile #content {
 	margin-left: 1.15em;
 }
 #scrollWrap .timeBg{
-	position: absolute;
-	left:0;
-	bottom: 2.65em;
 	width: 5.64em;
 	height: 5.92em;
+	display: inline-block;
+    margin: 0.5em auto auto 0em;
 }
 #scrollWrap .time{
-	position: absolute;
-	right:0.56em;
-	bottom: 3.45em;
 	width: 0.76em;
 	height: 3.87em;
+	display: inline-block;
+	background-image: url();
+    margin: 0em 0em 0.5em 0.2em;
 }
 /*第二页*/
 .GDTopbg{
 	width: 100%;
     margin-top: 1em;
+    margin-left: -0.15rem;
 	height: 4.82em;
     background-image: url(../images/huangpu/cenBG2.png);
     background-size:100% 100%;
@@ -463,7 +453,7 @@ body.huangpu-mobile #content {
     position: relative;
     background-image: url(../images/huangpu/pathBG.png);
     background-size: 100% 100%;
-    margin: 2em auto 0;
+    margin: 0.5em auto 0;
     width: 3.89em;
     height: 3.41em;
 }

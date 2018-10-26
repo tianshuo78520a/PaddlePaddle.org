@@ -404,7 +404,7 @@ body.huangpu-mobile #content {
 .GDTopbg p:nth-of-type(2){
     position: absolute;
     bottom: 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5em;
 }
 .GDTopimg{
 	position: absolute;

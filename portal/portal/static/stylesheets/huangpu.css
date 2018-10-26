@@ -28,7 +28,7 @@
 .projectLogo{
 	position: absolute;
     top: 68px;
-    right: 47px;
+    right: 143px;
     width: 203px;
     height: 51px;
 }
@@ -333,7 +333,7 @@ body.huangpu-mobile #content {
 	background-size: 100% 100%;
 }
 #scrollWrap .logo{
-	margin: 1em 0.75em 0.2em auto;
+	margin: 0.5em 0.75em 0.2em auto;
 	width: 1.41em;
 	height: 0.36em;
 }
@@ -344,7 +344,7 @@ body.huangpu-mobile #content {
 	height: 0.77em;
 }
 .text{
-	margin: 0.2rem 0.78rem auto auto;
+	margin: 0.2em 0.78em auto auto;
 	width: 4.3em;
 	height: auto;
 }
@@ -360,7 +360,8 @@ body.huangpu-mobile #content {
 	height: 0.41em;
 	display: block;
 	text-decoration: none;
-	margin-left: 1.15em;
+	margin-left: auto;
+	margin-right: 0;
 }
 #scrollWrap .timeBg{
 	width: 5.64em;
@@ -378,8 +379,7 @@ body.huangpu-mobile #content {
 /*第二页*/
 .GDTopbg{
 	width: 100%;
-    margin-top: 1em;
-    margin-left: -0.15rem;
+    margin-top: 0.5em;
 	height: 4.82em;
     background-image: url(../images/huangpu/cenBG2.png);
     background-size:100% 100%;
@@ -389,7 +389,7 @@ body.huangpu-mobile #content {
     padding-top: 0.5em;
     width: 3.17em;
     height: 2.44em;
-    margin-left: 2.3em;
+    margin: 0 auto;
 }
 .GDTopbg p {
 	width: 100%;
@@ -400,12 +400,11 @@ body.huangpu-mobile #content {
 }
 .GDTopbg p:nth-of-type(1){
  	 margin-top: 2.6em;
-     margin-left: 0.17em;
 }
 .GDTopbg p:nth-of-type(2){
     position: absolute;
-    left: 0.17em;
-    margin-top: 0.4em;
+    bottom: 0;
+    margin-bottom: 0.5em;
 }
 .GDTopimg{
 	position: absolute;

@@ -366,14 +366,14 @@ body.huangpu-mobile #content {
 	width: 5.64em;
 	height: 5.92em;
 	display: inline-block;
-    margin: 0.5rem auto auto 0rem;
+    margin: 0.5em auto auto 0em;
 }
 #scrollWrap .time{
 	width: 0.76em;
 	height: 3.87em;
 	display: inline-block;
 	background-image: url();
-    margin: 0rem 0rem 0.5rem 0.2rem;
+    margin: 0em 0em 0.5em 0.2em;
 }
 /*第二页*/
 .GDTopbg{
@@ -453,7 +453,7 @@ body.huangpu-mobile #content {
     position: relative;
     background-image: url(../images/huangpu/pathBG.png);
     background-size: 100% 100%;
-    margin: 0.5rem auto 0;
+    margin: 0.5em auto 0;
     width: 3.89em;
     height: 3.41em;
 }

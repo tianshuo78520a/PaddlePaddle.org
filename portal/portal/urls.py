@@ -46,7 +46,7 @@ urlpatterns = [
     url(r'^en', views.en_home_root, name='en_home'),
 
     url(r'^suite', views.suite_root, name='suite'),
-    url(r'^huangpu', views.huangpu_root, name='huangpu'),
+    # url(r'^huangpu', views.huangpu_root, name='huangpu'),
 
     # ---------------
     # BLOG URLS

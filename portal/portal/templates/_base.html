@@ -255,7 +255,6 @@
                           sync(idx.search(getSearchQuery(query)).map((result) => {
                               item = indexPathMap[result.ref];
 
-                              try {
                               var apiPath = '/documentation/api/';
                               if (item.path.substring(0, apiPath.length) === apiPath)
                                 item.isAPI = true;
@@ -265,8 +264,6 @@
                                 item.isModels = true;
 
                               return item;
-                          } catch(e){ return {'title': 'Jeffy', 'url': '/neighbor'}}
-
                           }));
                       },
                       display: 'title',

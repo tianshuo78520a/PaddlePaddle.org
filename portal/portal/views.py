@@ -32,6 +32,7 @@ from django.core.cache import cache
 from django.http import JsonResponse
 from django import forms
 import requests
+from user_agents import parse
 
 from portal import menu_helper, portal_helper, url_helper
 from deploy import transform
@@ -83,7 +84,7 @@ def change_lang(request):
     elif path in ['/documentation/models', '/documentation/mobile']:
         # There is no information on lang and version. The only way is to redirect to the documentation home
         response = redirect('/documentation/%s' % lang)
-    elif not path in ['/', '/en', '/zh']:
+    elif not path in ['/', '/en', '/zh', '/search', '/suite', '/huangpu']:
         # If not for homepage, its regular documentations.
         response = _find_matching_equivalent_page_for(path, request, lang)
     else:
@@ -358,6 +359,26 @@ def zh_home_root(request):
     return render(request, 'index.html')
 
 
+def suite_root(request):
+    portal_helper.set_preferred_language(request, None, 'zh')
+    return render(request, 'pps.html')
+
+
+def huangpu_root(request):
+    portal_helper.set_preferred_language(request, None, 'zh')
+
+    is_mobile = parse(request.META.get('HTTP_USER_AGENT', '')).is_mobile
+
+    return render(
+        request,
+        'huangpu-mobile.html' if is_mobile else 'huangpu.html',
+        {
+            'title': '黄埔计划延展图',
+            'wrapper_class': 'huangpu-mobile' if is_mobile else None
+        }
+    )
+
+
 def about_en(request):
     portal_helper.set_preferred_language(request, None, 'en')
     return render(request, 'about_en.html')
@@ -455,9 +476,12 @@ def search(request):
     """
     Placeholder for a search results page that uses local indexes.
     """
+    lang = request.GET.get('language', '')
+    portal_helper.set_preferred_language(request, None, lang)
+
     return render(request, 'search.html', {
         'q': request.GET.get('q', ''),
-        'lang': request.GET.get('language', ''),
+        'lang': lang,
         'CURRENT_DOCS_VERSION': request.GET.get('version', ''),
     })
 

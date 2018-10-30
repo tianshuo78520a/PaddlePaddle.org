@@ -1,0 +1,192 @@
+@import "_common-home.sass"
+
+$title-color: #333333
+$description-color: #999999
+
+
+.pps-home
+    background: $light-background
+
+    section
+        h1
+            text-align: center
+
+        .caption
+            color: $description-color
+            text-align: center
+
+    .hero
+        background-image: url('/static/images/pp-suite-banner.png')
+        background-repeat: no-repeat
+        background-size: cover
+        padding-top: 48px
+        height: $hero-carousel-height
+        padding-left: 15%
+        padding-right: 15%
+
+        color: #fff
+
+        .tag-line
+            margin-top: 1em
+
+        .sub-title
+            color: #fff
+
+        .btn
+            color: #fff
+            border-radius: 0
+            background: $accent-color
+
+            &:hover
+                background-color: #5a9bff
+
+    .quick-links
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px 0px
+        position: sticky
+        top: 60px
+        background: #f7f7f7
+        z-index: 1
+
+        #indicator
+            height: 3px
+            margin: 0
+            background: $home-link
+            display: none
+
+        .quick-links-list
+            display: flex
+            width: 100%
+
+        .link-body
+            text-align: center
+
+            .scroll-link
+                color: $title-color
+
+                &.selected
+                    color: $home-link
+
+                &:hover
+                    color: $accent-color
+
+        #indicator
+
+            &.slider
+                transition: width .3s ease-in-out, margin-left .3s ease-in-out
+                display: block
+
+
+    #illustration
+        img
+            width: 100%
+
+    #core-framework
+        .core-framework-service
+            position: relative
+
+            &.core-framework-service_training .core-framework-service-background
+                background-image: url("/static/images/pps/framework-training.png")
+
+            &.core-framework-service_serving .core-framework-service-background
+                background-image: url("/static/images/pps/framework-serving.png")
+
+            &.core-framework-service_mobile .core-framework-service-background
+                background-image: url("/static/images/pps/framework-mobile.png")
+
+            .core-framework-service-background
+                background-size: cover
+                background-position: center center
+                //filter: grayscale(1) brightness(0.35)
+                width: 100%
+                height: 100%
+                position: absolute
+
+            .core-framework-service-description
+                position: relative
+                height: 100%
+
+                &:hover
+                    background-color: rgba(89, 124, 241, 0.8)
+
+                h2, h4, p
+                    text-align: left
+                    color: white
+
+                h2
+                    margin-bottom: 52px
+                    font-weight: bold
+
+                p
+                    min-height: 90px
+
+
+                button
+                    bottom: 40px
+                    position: absolute
+
+    #applications
+        .app-table
+            border: 1px solid #498ffa
+
+        .type-row
+            color: #fff
+
+        .application-type
+            color: #000
+            background: #fff
+            width: 100%
+            height: 132px
+            border-bottom: 1px solid #498ffa
+            border-right: 1px solid #498ffa
+            padding-top: 1em
+
+            &.last
+                border-bottom: 0px
+
+            &.selected
+                background: $accent-color
+
+                p
+                    color: #fff
+
+            p
+                font-size: 18px
+
+        .application-body
+            &.hide
+                display: none
+
+            img
+                height: 24px
+                vertical-align: text-bottom
+
+    #services
+        color: $title-color
+
+        .service-desc
+            h3
+                color: $title-color
+
+@media (max-width: 1200px)
+    .pps-home
+        .hero
+            .tag-line
+                margin-top: 0
+                font-size: $font-xxlarge
+                line-height: normal
+
+            .sub-title
+                font-size: $font-medium
+
+        .quick-links
+            >.container
+                padding-top: 0.5rem!important
+                padding-bottom: 0!important
+
+                ul
+                    margin-bottom: 0
+
+            h3
+                font-size: $font-medium
+
+

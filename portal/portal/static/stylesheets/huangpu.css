@@ -1,0 +1,488 @@
+/*最外层*/
+#content{
+	background-image: url(../images/huangpu/bg.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+
+/*contentInner*/
+.contentInner{
+	width: 1200px;
+	height: auto;
+	margin: 0 auto;
+}
+/*project-计划*/
+.project{
+	width: 1200px;
+	height: auto;
+	position: relative;
+}
+.projectRight{
+	position: absolute;
+    top: 181px;
+    right: 143px;
+    width: 438px;
+    height: 104px;
+}
+.projectLogo{
+	position: absolute;
+    top: 68px;
+    right: 143px;
+    width: 203px;
+    height: 51px;
+}
+.projectText{
+	position: absolute;
+    top: 305px;
+    right: 130px;
+	width: 470px;
+	height: auto;
+
+}
+.projectText p{
+	font:26px 黑体;
+	color: #ffffff;
+	letter-spacing: 15px;
+}
+.projectText span,.projectText a{
+	display: block;
+}
+.projectText a{
+	text-decoration: none;
+	width:190px;
+	height: 68px;
+	margin:0 auto;
+	border:1px solid #FFFFFF;
+	border-radius: 34px;
+	margin-top:24px;
+}
+.projectText a span:nth-of-type(1){
+	font:24px 黑体;
+	color: #ffffff;
+	text-align: center;
+	margin-top:9px;
+	margin-bottom: 5px;
+}
+.projectText a span:nth-of-type(2){
+	font:16px 黑体;
+	color: #46dceb;
+	text-align: center;
+}
+.timePadding{
+	width: 100%;
+	height: 22px;
+}
+/*time-时间*/
+.time{
+	width: 872px;
+	height:164px;
+	background-image: url(../images/huangpu/time.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	margin:0 auto;
+	position: relative;
+}
+.timeLeft{
+	position: absolute;
+	top:42px;
+	left:42px;
+	width: 76px;
+	height: auto;
+}
+.timeCen{
+	position: absolute;
+	top:42px;
+	left:385px;
+	width: 76px;
+	height: auto;
+}
+.timeRight{
+	position: absolute;
+	top:42px;
+	right:42px;
+	width: 76px;
+	height: auto;
+}
+.timeLeft span,.timeCen span,.timeRight span{
+	display: block;
+}
+.timeLeft span:nth-of-type(1),.timeCen span:nth-of-type(1),.timeRight span:nth-of-type(1){
+	font:24px 黑体;
+	color: #FFFFFF;
+	text-align: center;
+}
+.timeLeft span:nth-of-type(2),.timeCen span:nth-of-type(2),.timeRight span:nth-of-type(2){
+	font:18px 黑体;
+	color: #FFFFFF;
+	text-align: center;
+}
+.timeLeft span:nth-of-type(3),.timeCen span:nth-of-type(3),.timeRight span:nth-of-type(3){
+	font:18px 黑体;
+	color: #FFFFFF;
+	text-align: center;
+}
+/*interflow-交流*/
+.interflow{
+	width: 1200px;
+	height: 435px;
+	margin:0 auto;
+	position: relative;
+}
+.interflow-left{
+	position: absolute;
+	top:60px;
+	left:0;
+	width: 525px;
+	height:375px;
+	background-image: url(../images/huangpu/cenBG1.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	z-index: 2;
+}
+.interflowLeft img{
+	display: block;
+	margin:50px auto 40px auto;
+}
+.interflowLeft p:nth-of-type(1){
+	font:27px 黑体;
+	color:#fefefe;
+	text-align: center;
+	margin-left:28px;
+}
+.interflowLeft p:nth-of-type(2){
+	font:30px 黑体;
+	color:#fefefe;
+	text-align: center;
+	margin-top:22px;
+	margin-left:30px;
+}
+/*cen*/
+.interflow-cen{
+	position: absolute;
+	top:60px;
+	left:320px;
+	width: 525px;
+	height:375px;
+	background-image: url(../images/huangpu/cenBG2.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	z-index: 3;
+}
+.interflowCen img{
+	display: block;
+	margin:20px auto 40px auto;
+}
+.interflowCen p:nth-of-type(1){
+	font:27px 黑体;
+	color:#fefefe;
+	text-align: center;
+	margin-left:28px;
+}
+.interflowCen p:nth-of-type(2){
+	font:30px 黑体;
+	color:#fefefe;
+	text-align: center;
+	margin-top:22px;
+	margin-left:20px;
+}
+/*right*/
+.interflow-right{
+	position: absolute;
+	top:60px;
+	right:0;
+	width: 525px;
+	height:375px;
+	background-image: url(../images/huangpu/cenBG3.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	z-index: 2;
+}
+.interflowRight img{
+	display: block;
+	margin:27px auto 40px auto;
+}
+.interflowRight p:nth-of-type(1){
+	font:27px 黑体;
+	color:#fefefe;
+	text-align: center;
+	margin-left:45px;
+}
+.interflowRight p:nth-of-type(2){
+	font:30px 黑体;
+	color:#fefefe;
+	text-align: center;
+	margin-top:22px;
+	margin-left:50px;
+}
+.pathPadding{
+	width: 100%;
+	height: 45px;
+}
+/*path-流程*/
+.path{
+	width: 1167px;
+	height: auto;
+	margin:0 auto;
+	/*padding-left:18px;
+	padding-right:18px;*/
+	overflow: hidden;
+}
+.pathLeft,.pathCen,.pathRight{
+	float: left;
+	width: 368px;
+	height: 324px;
+	background-image: url(../images/huangpu/pathBG.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.pathCen{
+	margin:0 30px;
+}
+.pathLeft h3,.pathCen h3,.pathRight h3{
+	font:30px 黑体;
+	color: #FEFEFE;
+	text-align: center;
+	margin-top:50px;
+	margin-bottom: 45px;
+}
+.pathLeft p,.pathCen p,.pathRight p{
+	width: 332px;
+	font:22px 黑体;
+	color: #FEFEFE;
+	line-height: 36px;
+	margin: 0 auto;
+  	text-align: justify;
+}
+/*apply-报名*/
+.applyPadding{
+	width: 100%;
+	height: 60px;
+}
+.apply{
+	width: 100%;
+	height: auto;
+	margin:0 auto;
+	padding-bottom: 72px;
+}
+.apply img{
+	display: block;
+	width: 227px;
+	height: 223px;
+	margin:0 auto;
+}
+.apply p{
+	font:34px 黑体;
+	color: #fefefe;
+	letter-spacing: 8px;
+	text-align: center;
+	padding-top:25px;
+}
+
+/*  Mobile styling below */
+
+body.huangpu-mobile #content {
+    /* Especially targetted at mobile */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#scrollWrap img{
+	display: block;
+}
+
+#scrollWrap img.fill{
+	width: 100%;
+	height: 100%;
+}
+
+#scrollWrap
+{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+#scrollWrap>div
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0rem;
+    left:0rem;
+    transition: transform 0.5s linear;
+}
+.up
+{
+    transform:translateY(-100%);
+}
+.down
+{
+    transform:translateY(100%);
+}
+#scrollWrap .yincang
+{
+    display: none !important;
+}
+/*第一页*/
+#scrollWrap>div{
+	/*background-color: #021358;*/
+	background-image: url(../images/huangpu/bg_03.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+#scrollWrap .logo{
+	margin: 0.5em 0.75em 0.2em auto;
+	width: 1.41em;
+	height: 0.36em;
+}
+.hpjx{
+    margin-right: 0.75em;
+    margin-left: auto;
+	width: 3.27em;
+	height: 0.77em;
+}
+.text{
+	margin: 0.2em 0.78em auto auto;
+	width: 4.3em;
+	height: auto;
+}
+.text p{
+	font:0.24em 黑体;
+	color: #ffffff;
+	text-align: right;
+	letter-spacing: 0.10em;
+	margin-bottom: 0.13em;
+}
+.text a{
+	width: 2.79em;
+	height: 0.41em;
+	display: block;
+	text-decoration: none;
+	margin-left: auto;
+	margin-right: 0;
+}
+#scrollWrap .timeBg{
+	width: 5.64em;
+	height: 5.92em;
+	display: inline-block;
+    margin: 0.5em auto auto 0em;
+}
+#scrollWrap .time{
+	width: 0.76em;
+	height: 3.87em;
+	display: inline-block;
+	background-image: url();
+    margin: 0em 0em 0.5em 0.2em;
+}
+/*第二页*/
+.GDTopbg{
+	width: 100%;
+    margin-top: 0.5em;
+	height: 4.82em;
+    background-image: url(../images/huangpu/cenBG2.png);
+    background-size:100% 100%;
+    position: relative;
+}
+.GDTopbg img{
+    padding-top: 0.5em;
+    width: 3.17em;
+    height: 2.44em;
+    margin: 0 auto;
+}
+.GDTopbg p {
+	width: 100%;
+	font:0.34em 黑体;
+	color: #fefefe;
+	text-align: center;
+
+}
+.GDTopbg p:nth-of-type(1){
+ 	 margin-top: 2.6em;
+}
+.GDTopbg p:nth-of-type(2){
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0.5em;
+}
+.GDTopimg{
+	position: absolute;
+	top:1.25em;
+	left:1.7em;
+	width: 3.2em;
+	height: 2.45em;
+}
+.GDToptext{
+	width: 3em;
+	position: absolute;
+	top:3.6em;
+	left: 1.8em;
+}
+.GDToptext1{
+	position: absolute;
+	top:3.6em;
+	left: 1.15em;
+}
+.GDToptext1 p:nth-of-type(1){
+	font:0.34em 黑体;
+	color: #fefefe;
+	text-align: center;
+	margin-top:0.55em;
+	margin-bottom: 0.3em;
+}
+.GDToptext1 p:nth-of-type(2){
+	font:0.38em 黑体;
+	color: #fefefe;
+	text-align: center;
+}
+.GDToptext p:nth-of-type(1){
+	font:0.34em 黑体;
+	color: #fefefe;
+	text-align: center;
+	margin-top:0.55em;
+	margin-bottom: 0.3em;
+}
+.GDToptext p:nth-of-type(2){
+	font:0.38em 黑体;
+	color: #fefefe;
+	text-align: center;
+}
+.GDBotbg{
+    position: relative;
+    background-image: url(../images/huangpu/pathBG.png);
+    background-size: 100% 100%;
+    margin: 0.5em auto 0;
+    width: 3.89em;
+    height: 3.41em;
+}
+.GDBotbg h3{
+	font:0.3em 黑体;
+	color: #FEFEFE;
+    padding-top: 1.4em;
+	margin-bottom: 1.4em;
+	text-align: center;
+}
+.GDBotbg p{
+    padding-left: 0.1em;
+	font:0.24em 黑体;
+	color: #FEFEFE;
+}
+/*第五页*/
+#scrollWrap .last{
+	background-image: url(../images/huangpu/fifthBG.png) !important;
+ 	background-repeat: no-repeat;
+ 	background-size: 100% 100%;
+}
+.ewm{
+	width: 2.1em;
+	height: 2.1em;
+	margin:3.25em auto;
+}
+.ewm p{
+	font:0.32em 黑体;
+	color: #FEFEFE;
+	text-align: center;
+	letter-spacing: 0.05em;
+	margin-top:0.4em;
+}

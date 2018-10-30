@@ -1,0 +1,191 @@
+{% extends "_base_nav.html" %}
+
+{% block post_content %}
+{% load app_tags %}
+
+<link href="/static/stylesheets/huangpu.css?{% server_start_time %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+<div id="scrollWrap" class="content">
+    <div>
+    	<div class="logo">
+    		<img class="fill" src="/static/images/huangpu/h5img1.png"/>
+    	</div>
+    	<div class="hpjx">
+    		<img class="fill" src="/static/images/huangpu/h5img2.png"/>
+    	</div>
+    	<div class="text">
+    		<p>-深度学习架构师俱乐部-</p>
+    		<a href="https://iwenjuan.baidu.com/?code=e71faf">
+    			<img class="fill" src="/static/images/huangpu/tetimg.png"/>
+    		</a>
+    	</div>
+    	<div class="timeBg">
+    		<img class="fill" src="/static/images/huangpu/h5img3.png"/>
+    	</div>
+    	<div class="time">
+    		<img class="fill" src="/static/images/huangpu/h5img4.png"/>
+    	</div>
+    </div>
+    <div class="down">
+    	<div class="GDTopbg">
+            <img src="/static/images/huangpu/h5Timg2.png"/>
+            <p>培养产业深度学习</p>
+        	<p>高端人才</p>
+    	</div>
+        <div class="GDBotbg">
+            <h3>与百度架构师深入交流</h3>
+        	<p>优选百度大脑、PaddlePaddle等深度学习相关业务架构师20位，每季度定期线下私享会，永不断电的线上互动，去中心化的多对多交流。</p>
+        </div>
+    </div>
+    <div class="down">
+      <div class="GDTopbg">
+            <img src="/static/images/huangpu/cen_2.png"/>
+            <p>助力产业深度学习</p>
+        	<p>创新应用落地</p>
+    	</div>
+        <div class="GDBotbg">
+            <h3>全方位支持企业创新项目</h3>
+        	<p>入选企业将获专业PMO支持，全程推进项目落地，百度多业务资源对接，丰富的市场传播推广，强力支持企业创新落地应用。</p>
+        </div>
+    </div>
+    <div class="down">
+       <div class="GDTopbg">
+           <img src="/static/images/huangpu/JSIMG.png"/>
+           <p>搭建国内最有影响力的深度学习</p>
+        	<p>技术人才交流圈 </p>
+    	</div>
+        <div class="GDBotbg">
+            <h3>丰富形式持续互动</h3>
+        	<p>前瞻的技术思维与观点碰撞，强竞争力的深度学习课程体系，亲密互动共同成长，搭建国内深度学习高端技术人才交流圈。</p>
+        </div>
+    </div>
+    <div class="down" style="background-image: url(/static/images/huangpu/fifthBG.png);background-repeat: no-repeat;background-size: 100% 100%;">
+       <div class="ewm">
+       	<img class="fill" src="/static/images/huangpu/EWM.png"/>
+       	<p>-扫码报名-</p>
+       </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ block.super }}
+
+<script type="text/javascript" src="/static/js/huangpu/zepto.js"></script>
+<script type="text/javascript" src="/static/js/huangpu/touch.js"></script>
+<script type="text/javascript" src="/static/js/huangpu/fx.js"></script>
+<script type="text/javascript" src="/static/js/huangpu/fx_methods.js"></script>
+<script>
+    var scrollWrap = document.getElementById("scrollWrap");
+
+    function setBaseFontSize(){
+        scrollWrap.style.fontSize = 100 * (
+            window.document.documentElement.getBoundingClientRect().width / 750
+        ) + "px";
+    }
+
+    window.addEventListener("DOMContentLoaded",setBaseFontSize,!1),
+    window.addEventListener("resize",setBaseFontSize);
+
+  var i=0, firstChildOfContent = $(".content>div");
+  function changeUp(){
+        if(i<4)
+        {
+            firstChildOfContent.eq(i).addClass("up");
+            firstChildOfContent.eq(i).children().addClass("yincang");
+            $(".zhong_wen").fadeOut(3000);
+            i++;
+            firstChildOfContent.eq(i).removeClass("down");
+            firstChildOfContent.eq(i).children().removeClass("yincang");
+        }
+    }
+  function changeDown(){
+        if(i>0)
+        {
+            firstChildOfContent.eq(i).addClass("down");
+            firstChildOfContent.eq(i).children().addClass("yincang");
+            i--;
+            firstChildOfContent.eq(i).removeClass("up");
+            firstChildOfContent.eq(i).children().removeClass("yincang");
+        }
+    }
+
+
+    //滚动条是否在顶部
+    var isScroll_top = true;
+    //滚动条是否在底部
+    var isScroll_bottom = false;
+
+    function restoreEvent(event) {
+        switch(event.type){
+            case "touchstart" :
+                $startY = event.touches[0].clientY;
+                break;
+            case "touchmove" :
+                $moveY = event.touches[0].clientY;
+                //滑动距离
+                touchesY = $startY - $moveY;
+                //滚动条顶部
+                if(isScroll_top) {
+                    if(touchesY < 0) {
+                        event.preventDefault();
+                    } else{
+                        if (scrollWrap.scrollHeight == scrollWrap.clientHeight) {
+                            event.preventDefault();
+                        } else {
+                            event.stopPropagation();
+                        }
+                    }
+
+                    if (touchesY > 0) {
+                        event.preventDefault();
+                    } else{
+                        event.stopPropagation();
+                    }
+                //滚动条底部
+                } else if (isScroll_bottom){
+                    if (touchesY > 0) {
+                        event.preventDefault();
+                    } else{
+                        event.stopPropagation();
+                    }
+                }
+                break;
+            case "touchend" :
+                if (touchesY > 0){
+                  changeUp();
+                  touchesY = 0;
+                } else if(touchesY < -0){
+                  changeDown();
+                  touchesY = 0
+                }
+                break;
+        }
+    }
+
+    /*监听容器的 touch 触发事件处理逻辑*/
+    scrollWrap.addEventListener("touchstart",restoreEvent);
+    scrollWrap.addEventListener("touchmove",restoreEvent);
+    scrollWrap.addEventListener("touchend",restoreEvent);
+      /*监听容器 scroll 滚动事件处理逻辑*/
+    scrollWrap.addEventListener("scroll",function() {
+
+    var tabView = scrollWrap;
+    var contentHeight = tabView.scrollHeight, //内容高度
+    scrollTop = tabView.scrollTop; //滚动高度
+    viewHeight = tabView.clientHeight;
+
+    if (scrollTop == 0) {
+        isScroll_top = true;
+    } else{
+        isScroll_top = false;
+    }
+    if ((scrollTop / (contentHeight - viewHeight)) == 1 ) {
+        isScroll_bottom = true;
+    } else {
+        isScroll_bottom = false;
+    }
+});
+</script>
+{% endblock %}

@@ -53,6 +53,39 @@
                 i
                     margin-right: 6px
 
+                &:hover
+                    color: $accent-color
+
+    .sub-menu
+        width: 320px
+        color: #fff
+        background: #000
+
+        // To reverse default padding bottom behavior on bootstrap menu.
+        padding-bottom: 0px
+        margin-top: 0px
+
+        li
+            a
+                display: block
+
+            &:hover
+                background-color: #2d2d2d
+
+            &:active
+                background-color: #444
+
+        .title
+            color: white
+            margin: 0
+
+        .sub-title
+            font-size: $font-small
+            color: $light-font
+
+    li.dropdown:hover
+        > ul.dropdown-menu
+            display: block
 
 body
     >#content
@@ -130,7 +163,7 @@ body
                 color: $accent-color
 
             img
-                content:url("/static/images/logo.png")
+                content: url("/static/images/logo.png")
 
         .navbar
             background-color: transparent
@@ -594,3 +627,15 @@ span.twitter-typeahead
         display: block !important
         .input-group span.twitter-typeahead .tt-menu
             top: 2.375rem !important
+
+@media (max-width: 991px)
+    .navbar
+
+        .sub-menu
+            position: relative
+            left: 10px
+            padding: 0px
+
+            li
+                a
+                    padding: 0!important

@@ -1,0 +1,416 @@
+{% extends "_base_nav.html" %}
+
+{% load i18n %}
+
+{% block post_content %}
+{% load app_tags %}
+
+<link href="/static/stylesheets/pps.css?{% server_start_time %}" media="screen, projection" rel="stylesheet"
+      type="text/css"/>
+
+{% endblock %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block content %}
+
+<div class="pps-home">
+    <!-- PPS heros banner -->
+    <section class="hero">
+        <div class="container py-5">
+            <div class="tag-line">PaddlePaddle Suite</div>
+            <div class="sub-title py-4">PPS是面向工业应用的国际领先的深度学习全功能套件。支持企业和开发者自主构建基于深度学习的智能应用，助力企业优化运营效率，提升经营水平，全面实现AI时代的业务转型</div>
+            <button class="btn" data-toggle="modal" data-target="#feedbackModal">联系我们</button>
+        </div>
+    </section>
+
+    <!-- section selector -->
+    <section class="quick-links">
+        <div class="container pt-4 pb-1">
+            <div class="row">
+                <ul class="quick-links-list">
+                    <li class="col-1"></li>
+                    <li class="col-2 link-body">
+                        <a class="scroll-link selected" href="#illustration"><h3>整体架构</h3></a>
+                    </li>
+                    <li class="col-2 link-body">
+                        <a class="scroll-link" href="#core-framework"><h3>核心框架</h3></a>
+                    </li>
+                    <li class="col-2 link-body">
+                        <a class="scroll-link" href="#toolsets"><h3>辅助工具</h3></a>
+                    </li>
+                    <li class="col-2 link-body">
+                        <a class="scroll-link" href="#applications"><h3>通用技术方案</h3></a>
+                    </li>
+                    <li class="col-2 link-body">
+                        <a class="scroll-link" href="#services"><h3>服务平台</h3></a>
+                    </li>
+                    <li class="col-1"></li>
+                </ul>
+            </div>
+        </div>
+        <div id="indicator"></div>
+    </section>
+
+    <!-- Structure illustration section -->
+
+    <section id="illustration">
+        <div class="container py-5">
+            <h1 class="my-4">整体架构</h1>
+            <div class="caption mb-6">核心框架为最底层基础，工具是基于核心框架，通用解决方案是基于框架和工具并把特并技术场景所需的多种能力的打包，服务平台是应用层，基于框架各种技术进行的产品化。</div>
+            <img src="/static/images/pps/structure.png"/>
+        </div>
+    </section>
+
+    <!-- Core frameworks -->
+    <section id="core-framework">
+        <div class="container py-5">
+            <h1 class="my-4">核心框架</h1>
+            <div class="caption mb-6">PPS提供完善的基础框架服务，能够让企业开发者高效完成训练、预测以及不同平台的部署</div>
+
+            <div class="row">
+                <a href="https://github.com/PaddlePaddle/Paddle" target="_blank" class="core-framework-service core-framework-service_training col-lg-4 px-0">
+                    <div class="core-framework-service-background"></div>
+                    <div class="core-framework-service-description">
+                        <div class="core-framework-service-description-body px-5 py-6">
+                            <h4 class="mb-2">PaddlePaddle</h4>
+                            <h2>训练框架</h2>
+                            <p class="mb-3">PaddlePaddle Fluid提高了框架对各类机器学习任务的描述能力，能够描述潜在可能出现的任意深度学习模型</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/PaddlePaddle/Paddle/tree/develop/paddle/fluid/inference" target="_blank" class="core-framework-service core-framework-service_serving col-lg-4 px-0">
+                    <div class="core-framework-service-background"></div>
+                    <div class="core-framework-service-description">
+                        <div class="core-framework-service-description-body px-5 py-6">
+                            <h4 class="mb-2">PaddlePaddle</h4>
+                            <h2>Serving</h2>
+                            <p class="mb-3">PaddlePaddle Serving可灵活适配多种预测引擎，具有引擎原生、快速可用的特点，并能兼容业内主流预测引擎TensorRT</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/PaddlePaddle/paddle-mobile" target="_blank" class="core-framework-service core-framework-service_mobile col-lg-4 px-0">
+                    <div class="core-framework-service-background"></div>
+                    <div class="core-framework-service-description">
+                        <div class="core-framework-service-description-body px-5 py-6">
+                            <h4 class="mb-2">PaddlePaddle</h4>
+                            <h2>Mobile</h2>
+                            <p class="mb-3">Paddle Paddle Mobile 1.0 支持在多种移动平台上的深度学习开发、对移动端GPU实现全覆盖</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toolsets -->
+    <section id="toolsets">
+        <div class="container py-5">
+            <h1 class="my-4">辅助工具集</h1>
+            <div class="caption mb-6">PPS提供了强大的深度学习辅助工具，帮助您大幅提高深度学习任务效率</div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="tool-desc px-4">
+                        <a href="https://github.com/PaddlePaddle/PARL" target="_blank">
+                            <svg style="width: 155px;" viewBox="0 0 477 113"><path d="M269.77,44.88c0-4.63-.84-9.91-2.53-13a20.26,20.26,0,0,0-6.77-7.41,28.59,28.59,0,0,0-9.83-3.94,56.19,56.19,0,0,0-11.59-1.18H209.51V93.18h16.85V71c11.13,0,15.43.2,22.75-.94a30.46,30.46,0,0,0,10.65-3.59,19.37,19.37,0,0,0,7.3-7.47C268.87,55.79,269.77,50.14,269.77,44.88Zm-17.61,5.95a9.65,9.65,0,0,1-4.07,3.06c-3.89,1.59-10.3,1.43-21.73,1.43V35c10.92,0,18.18-.28,22.29,1.68a9.45,9.45,0,0,1,3.67,3.06,7.46,7.46,0,0,1,1.43,4.86C253.75,47.08,253.22,49.47,252.17,50.83Z"/><polygon points="450.89 76.1 450.89 19.34 433.81 19.34 433.81 93.18 435.88 93.18 450.89 93.18 477.41 93.18 477.41 76.1 450.89 76.1"/><polygon points="313.25 22.57 313.12 22.54 311.89 19.34 303.44 19.34 303.05 19.46 302.65 19.34 294.2 19.34 292.97 22.54 292.84 22.57 292.89 22.73 265.63 93.38 285.93 93.38 303.05 49.03 320.16 93.38 340.47 93.38 313.2 22.73 313.25 22.57"/><path d="M404.2,65.63a20.16,20.16,0,0,0,7.3-7.76c1.8-3.22,2.71-7.74,2.71-13,0-4.63-.84-9.91-2.53-13a20.26,20.26,0,0,0-6.77-7.41,28.59,28.59,0,0,0-9.83-3.94,56.18,56.18,0,0,0-11.59-1.18H353.94V93.18h16.85V69.88c5.25,0,9,.11,12.22.1l16.38,23.2H419.2L400.09,67.52A27.19,27.19,0,0,0,404.2,65.63ZM370.79,34.76c10.92,0,18.18-.28,22.29,1.68a9.45,9.45,0,0,1,3.67,3.06,7.46,7.46,0,0,1,1.43,4.86A8.88,8.88,0,0,1,396.59,50,9.66,9.66,0,0,1,392.52,53c-3.89,1.59-10.3,1.14-21.73,1.14Z"/><path d="M9.75,18.71V44H.34V68.7H9.75V94a18.82,18.82,0,0,0,18.82,18.82H47.4V94H28.58V18.71H47.4V-.12H28.58A18.82,18.82,0,0,0,9.75,18.71Z"/><polygon points="49.72 56.36 49.72 75.18 68.55 75.18 68.55 56.36 68.55 37.53 49.72 37.53 49.72 56.36"/><polygon points="125.02 56.36 125.02 37.53 106.2 37.53 106.2 56.36 106.2 75.18 125.02 75.18 125.02 56.36"/><path d="M162.67,37.53V18.71A18.82,18.82,0,0,0,143.84-.12H125V18.71h18.82V94H125v18.82h18.82A18.82,18.82,0,0,0,162.67,94V68.7h9.41V44h-9.41Z"/></svg>
+                        </a>
+                        <p class="my-5">PARL是一个易用，通用，实用的强化学习工具，对主流算法实现全覆盖，支持大规模并行，能够方便的进行强化学习算法定制</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="tool-desc px-4">
+                        <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/HiNAS_models" target="_blank">
+                            <svg style="height: 28px;" fill="#231f20" viewBox="0 0 165 35">
+    <path d="M19.48,27.71H10.89L9,34H1L10.89,2H21.26l10,32h-10Zm-1.73-7-2.59-9.31-2.59,9.31Z"/><path d="M56.83,34H48.19V30.06c-1.25,2.93-3.74,4.42-7.39,4.42-4.61,0-7.15-2.59-7.15-7.3v-17H43v15c0,1.92.43,2.54,1.87,2.54,1.68,0,2.74-1.25,2.74-3.26V10.14h9.22Z"/>
+    <path d="M76.46,16.24H71.7V25c0,1.82.53,2.45,2.16,2.45a11.28,11.28,0,0,0,2.59-.38v6.67a27.82,27.82,0,0,1-5.38.53c-3.22,0-5-.58-6.48-2a6.34,6.34,0,0,1-1.87-4.56c0-.62,0-.62,0-4V16.24H59.13v-6.1h4l.62-7.63,8.16-.29-.19,7.92h4.75Z"/>
+    <path d="M104.54,22.14c0,7.2-5.52,12.34-13.25,12.34-7.49,0-12.91-5.18-12.91-12.34S83.85,9.66,91.48,9.66,104.54,14.7,104.54,22.14Zm-16.23,0c0,4.9.86,6.72,3.07,6.72a2.43,2.43,0,0,0,2.54-1.58,19.23,19.23,0,0,0,.67-5.33c0-4.66-.86-6.38-3.12-6.38S88.31,17.44,88.31,22.09Z"/>
+    <path d="M108.47,2h12.38c5.28,0,8.88,1.39,11.81,4.51a16.43,16.43,0,0,1,4.27,11.42c0,9.55-6.29,16.08-15.46,16.08h-13Zm12.38,24.67c3.41,0,5.81-3.6,5.81-8.69a12.31,12.31,0,0,0-1.44-6.1,4.73,4.73,0,0,0-4.37-2.64h-2.54V26.66Z"/>
+    <path d="M163.48,34H141.06V2h9.84V26.18h12.58Z"/></svg>
+                        </a>
+                        <p class="my-5">AutoDL是一个网络结构自动化设计工具，无需特殊软硬件设备和特殊训练，可以快速得到定制化高质量的模型，能更高效自动搜索神经网络结构</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="tool-desc px-4">
+                        <a href="http://visualdl.paddlepaddle.org/" target="_blank">
+                            <svg style="width: 200px;" viewBox="0 0 150 24"><defs><style>.cls-2{opacity:0.85;}.cls-3{opacity:0.65;}</style></defs><title>logo</title><path class="cls-1" d="M50.85,21.48,45,3.33h4L51.71,12l1.43,5.7h.08L54.6,12l2.7-8.71h3.88l-5.9,18.15Z"/><path class="cls-1" d="M61.72,4.47V3.9C61.72,2.81,62.4,2,64,2s2.24.81,2.24,1.9v.57c0,1.09-.68,1.9-2.24,1.9S61.72,5.56,61.72,4.47ZM62,7.83h3.85V21.48H62Z"/><path class="cls-1" d="M67.05,19.35l2.26-2.29a4.75,4.75,0,0,0,3.62,1.74c1.51,0,2-.49,2-1.3s-.42-1-1.38-1.14l-1.48-.18C69,15.78,67.5,14.43,67.5,12c0-2.63,2.05-4.45,5.31-4.45a6.86,6.86,0,0,1,5.57,2.13l-2.21,2.26A4.56,4.56,0,0,0,73,10.5c-1.3,0-1.82.47-1.82,1.14s.31,1.12,1.43,1.27l1.53.21c3,.39,4.5,1.74,4.5,4.11,0,2.63-2.34,4.55-5.85,4.55A7.13,7.13,0,0,1,67.05,19.35Z"/><path class="cls-1" d="M88,19.19h-.13a3.71,3.71,0,0,1-3.82,2.6c-2.78,0-4.27-2-4.27-5.38V7.83h3.85v8.24c0,1.66.55,2.6,2,2.6a2.17,2.17,0,0,0,2.42-2V7.83h3.85V21.48H88Z"/><path class="cls-1" d="M104.27,21.48a2.6,2.6,0,0,1-2.6-2.39h-.16c-.42,1.77-1.92,2.7-4,2.7-2.73,0-4.24-1.61-4.24-4,0-2.89,2.24-4.27,5.85-4.27h2.16v-.86c0-1.33-.65-2.16-2.26-2.16a3.37,3.37,0,0,0-2.94,1.61l-2.29-2c1.09-1.61,2.65-2.6,5.51-2.6,3.85,0,5.83,1.77,5.83,5v6h1.27v3Zm-3-4.14V15.73H99.41c-1.48,0-2.26.55-2.26,1.53v.39c0,1,.65,1.46,1.79,1.46S101.28,18.59,101.28,17.34Z"/><path class="cls-1" d="M111.5,21.48c-2.63,0-3.82-1.33-3.82-3.75V2.23h3.85V18.49h1.72v3Z"/><path class="cls-1" d="M119.3,3.33h6.84c4.81,0,8,3,8,9.08s-3.17,9.08-8,9.08H119.3ZM126.14,18c2.34,0,3.8-1.27,3.8-4.16V11c0-2.89-1.46-4.16-3.8-4.16h-2.89V18Z"/><path class="cls-1" d="M136.13,21.48V3.33h4V18H147v3.51Z"/><circle class="cls-1" cx="19.58" cy="4.33" r="2.05"/><circle class="cls-2" cx="19.58" cy="9.69" r="2.05"/><circle class="cls-2" cx="19.58" cy="15.04" r="2.05"/><circle class="cls-1" cx="24.58" cy="7.03" r="2.05"/><circle class="cls-2" cx="24.58" cy="12.39" r="2.05"/><circle class="cls-3" cx="19.58" cy="20.38" r="2.05"/><circle class="cls-3" cx="24.58" cy="17.67" r="2.05"/><circle class="cls-1" cx="29.59" cy="9.69" r="2.05"/><circle class="cls-3" cx="29.6" cy="15.04" r="2.05"/><circle class="cls-1" cx="34.88" cy="12.39" r="2.05"/><circle class="cls-3" cx="14.43" cy="17.8" r="2.05"/><circle class="cls-1" cx="9.56" cy="9.73" r="2.05"/><circle class="cls-1" cx="14.43" cy="7.03" r="2.05"/><circle class="cls-3" cx="9.43" cy="15.15" r="2.05"/><circle class="cls-1" cx="4.14" cy="12.45" r="2.05"/></svg>
+                        </a>
+                        <p class="my-5">
+                            VisualDL是一个面向深度学习任务设计的可视化工具，可以实现实时、可视化地展示模型训练过程中的各个参数以及计算的数据流图，帮助模型训练者更好地理解、调试、优化模型</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- General technical solutions -->
+    <section id="applications">
+        <div class="container py-5">
+            <h1 class="my-4">通用技术方案</h1>
+            <div class="caption mb-6">PPS在推荐、视觉和文本处理三大领域提供了智能技术方案</div>
+
+            <div class="row app-table">
+                <div class="col-lg-3">
+                    <div class="row type-row">
+                        <div class="application-type px-5 d-flex align-items-center selected" id="rec">
+                            <div>
+                                <p>PaddleRec</p>
+                                <p>智能推荐技术方案</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row type-row">
+                        <div class="application-type d-flex align-items-center px-5" id="cv">
+                            <div>
+                                <p>PaddleCV</p>
+                                <p>智能视觉技术方案</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row type-row">
+                        <div class="application-type last px-5 d-flex align-items-center" id="nlp">
+                            <div>
+                                <p>Paddle NLP</p>
+                                <p>智能文本处理技术方案</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 application-body" id="rec-description">
+                    <div class="application-body-contents p-4">
+                        <div class="row mb-3">
+                                <p>适用场景</p>
+                            <div class="col-lg-10">
+                                <p>新闻库构建：新闻资源自动标注<br/>
+    新闻召回：基于标签的显示召回，基于深度学习模型的隐式召回<br/>
+    个性化新闻排序：基于深度学习的点击率预估</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                                <p>方案构成</p>
+                            <div class="col-lg-10">
+                                <p>丰富的模型<br/>
+    支持可复现效果的公开数据集：RecSys Challenge 2015/CIKM Cup 2016<br/>
+    高效稳定的分布式训练框架：小时级数据流大规模分布式数据并行训练，支撑千亿特征的大规模稀疏参数服务器训练方案</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                                <p>经典模型</p>
+                            <div class="col-lg-10">
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleRec/ctr" target="_blank">DeepCTR</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleRec/gru4rec" target="_blank">GRU4Rec</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleRec/multiview_simnet" target="_blank">Multi-view Simnet</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleRec/ssr" target="_blank">序列语义召回</a>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                                <p>应用案例</p>
+                            <div class="col-lg-10">
+                                <p><img src="/static/images/pps/shoujibaidu.png"> 百度Feed流新闻资源召回、排序</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 application-body hide" id="cv-description">
+                    <div class="application-body-contents p-4">
+
+                        <div class="row mb-3">
+                                <p>适用场景</p>
+                            <div class="col-lg-10">
+                                <p>图像识别和检索、医学领域图像识别、交通场景识别、车道定位、光学文字识别、图像风格迁移、智能视频分析等领域</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                                <p>方案构成</p>
+                            <div class="col-lg-10">
+                                <p>包含一系列图像分类、物体检测、
+    图像语义分割、OCR识别、度量学习、
+    图像生成、视频分类模型、
+    高效的服务器和端上预测引擎</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                                <p>经典模型</p>
+                            <div class="col-lg-10">
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/image_classification" target="_blank">ResNet</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/image_classification" target="_blank">SE-ResNet</a> |
+                                <a href="https://github.com/PaddlePaddle/models/blob/develop/fluid/PaddleCV/object_detection" target="_blank">MobileNet-SSD</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/faster_rcnn" target="_blank">Faster-RCNN</a> |
+                                <a href="https://github.com/PaddlePaddle/models/blob/develop/fluid/PaddleCV/face_detection" target="_blank">PyramidBox</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/deeplabv3+" target="_blank">Deeplab v3+</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/icnet" target="_blank">ICNet</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/ocr_recognition" target="_blank">OCR CTC/Attention</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/video_classification" target="_blank">TSN</a> |
+                                <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleCV/metric_learning" target="_blank">Metric Learning</a> |
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                                <p>应用案例</p>
+                            <div class="col-lg-10">
+                                <p><img src="/static/images/pps/baiduditu.png"> 百度地图导航  百度OCR特征垂类识别  <img src="/static/images/pps/shoujibaidu.png"> 手机百度Feed视频分析  <img src="/static/images/pps/baidunuomi.png"> 糯米菜品识别</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 application-body hide" id="nlp-description">
+                    <div class="application-body-contents p-4">
+                        <div class="row mb-3">
+                            <p>适用场景</p>
+                            <div class="col-lg-10">
+                                <p>舆情分析、广告搜索、机器翻译、智能对话、内容摘要等</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                                <p>方案构成</p>
+                            <div class="col-lg-10">
+                                <p>开放一系列领先的语义匹配模型和数据集<br/>
+开放当前机器翻译领域内效果最好的模型Transformer<br/>
+开放阅读理解经典BiDAF模型和最大的中文开放数据集DuReader</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                                <p>经典模型</p>
+                            <div class="col-lg-10">
+                                <p>
+                                    <a href="https://github.com/baidu/lac/blob/master/README.md" target="_blank">词法分析</a> |
+                                    <a href="https://github.com/baidu/Senta/blob/master/README.md" target="_blank">情感分析</a> |
+                                    <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleNLP/deep_attention_matching_net" target="_blank">语义匹配</a> |
+                                    <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleNLP/neural_machine_translation/transformer" target="_blank">机器翻译</a> |
+                                    <a href="https://github.com/PaddlePaddle/models/tree/develop/fluid/PaddleNLP/machine_reading_comprehension" target="_blank">阅读理解</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                                <p>应用案例</p>
+                            <div class="col-lg-10">
+                                <p><img src="/static/images/pps/baidusousuo.png"> 百度搜索语义匹配任务  百度搜索结果中精确答案匹配  <img src="/static/images/pps/baidufanyi.png"> 百度机器翻译</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service platforms -->
+    <section id="services" class="pb-6">
+        <div class="container py-5">
+            <h1 class="my-4">服务平台</h1>
+            <div class="caption mb-6">PPS搭建了功能强大的服务平台，提供深度学习一站式服务</div>
+
+            <div class="row">
+                <a class="col-lg-4" href="http://ai.baidu.com/easydl/" target="_blank">
+                    <div class="service-desc">
+                        <h3>EasyDL</h3>
+                        <p class="my-3">支持零算法基础训练业务定制模型，操作可视化，无需懂深度学习，即便是零AI基础也可以在10分钟内训练出深度学习模型</p>
+                    </div>
+                </a>
+
+                <a class="col-lg-4" href="http://aistudio.baidu.com/#/projectoverview" target="_blank">
+                    <div class="service-desc">
+                        <h3>AIStudio</h3>
+                        <p class="my-3">集成“数据、算法、算力”的PaddlePaddle实训平台，具有云端集成、简单易用、运行高效和资源免费的特点</p>
+                    </div>
+                </a>
+
+                <a class="col-lg-4" href="https://cloud.baidu.com/product/infinite.html" target="_blank">
+                    <div class="service-desc">
+                        <h3>Infinite</h3>
+                        <p class="my-3">世界先进的分布式并行计算深度学习平台，为您提供强大的、先进的弹性计算资源</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+{% block scripts %}
+{{ block.super }}
+
+<script>
+    var applicationBodies = $('.application-body'),
+        applicationTypes = $('.application-type');
+
+    applicationTypes.hover(function (event) {
+        var el = $(event.target).closest('.application-type'),
+            id = el.attr('id');
+
+        applicationBodies.addClass('hide');
+        applicationTypes.removeClass('selected');
+
+        el.addClass('selected');
+        $('#' + id + '-description').removeClass('hide');
+    });
+
+    // Update the location of the quick link indicator
+    function updateIndicator() {
+        var selectedItem = $('.scroll-link.selected');
+
+        var style = {'margin-left': selectedItem.offset().left,
+                     'width': selectedItem.parent('.link-body').width()};
+
+        $('#indicator').css(style);
+    }
+
+    // Scroll to the section
+    var quickLinks = $('.scroll-link');
+    $( "a.scroll-link" ).click(function( event ) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top - 90}, 500);
+
+        quickLinks.removeClass('selected');
+
+        $(this).addClass('selected');
+        updateIndicator();
+    });
+
+    $( window ).resize(function() {
+        updateIndicator();
+    });
+
+    // Bring the indicator to the right place
+    updateIndicator();
+    $('#indicator').addClass('slider');
+
+    // Create section: target-offset map
+    var sections = {};
+    quickLinks.each(function(index, value){
+            var $el = $(value);
+            var anchorId = $el.attr('href');
+            var target = $(anchorId).offset().top - 300;
+            sections[$el.attr('href')] = target;
+    });
+
+    // Base on the scroll offset, update the selected quick link
+    function updateSelectedQuickLink() {
+        position = $(window).scrollTop();
+        for (var section in sections) {
+            if (position >= sections[section]) {
+                quickLinks.removeClass("selected");
+                $('.scroll-link[href="' + section + '"]').addClass('selected');
+                updateIndicator();
+            }
+        }
+    }
+
+    // Only update the selected quick link when the scroll event settles
+    var selectedQuickLinkTimer;
+    $(window).scroll(function(){
+        clearTimeout(selectedQuickLinkTimer);
+        selectedQuickLinkTimer = setTimeout(updateSelectedQuickLink, 100);
+    });
+
+</script>
+{% endblock %}

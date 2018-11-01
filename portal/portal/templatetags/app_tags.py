@@ -65,6 +65,7 @@ def nav_bar(context):
     lang_label = u'中文'
     lang_link = '/change-lang?lang_code=zh'
     community_link = 'https://github.com/PaddlePaddle/Paddle/issues'
+    default_docs_version = settings.DEFAULT_DOCS_VERSION
 
     if current_lang_code and current_lang_code == 'zh':
         lang_label = 'English'
@@ -75,6 +76,7 @@ def nav_bar(context):
         # 'root_nav': root_navigation,
         'lang_def': { 'label': lang_label, 'link': lang_link },
         'community_link': community_link,
+        'default_docs_version': default_docs_version,
     })
 
 

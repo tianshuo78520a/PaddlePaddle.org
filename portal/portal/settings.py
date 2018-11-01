@@ -111,6 +111,7 @@ VERSIONS = [
     { 'name': '0.14.0', 'api': 'Fluid' },
     { 'name': '0.15.0', 'api': 'Fluid' },
     { 'name': '1.0', 'api': 'Fluid'},
+    { 'name': '1.1', 'api': 'Fluid'},
 ]
 
 if DEBUG:

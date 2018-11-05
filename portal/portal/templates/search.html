@@ -146,7 +146,7 @@
             window.history.pushState({}, 'Page ' + target.innerText, target.href);
             event.preventDefault();
 
-            render();
+            Search.renderPage(idx, getSearchQuery);
         }
 
         if (keyValues.hasOwnProperty('q')){

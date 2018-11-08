@@ -22,12 +22,12 @@ try:
 except:
     print("""
     ============================================================================
-    ===                              WARNING!                                === 
+    ===                              WARNING!                                ===
     ===                                                                      ===
-    ===    Unable to import paddle module, will not generate API documents!  === 
-    ===    Make sure that the built Python directory (containing paddle)     === 
-    ===    is available in the PYTHONPATH of where you are                   === 
-    ===    running ./runserver from.                                         === 
+    ===    Unable to import paddle module, will not generate API documents!  ===
+    ===    Make sure that the built Python directory (containing paddle)     ===
+    ===    is available in the PYTHONPATH of where you are                   ===
+    ===    running ./runserver from.                                         ===
     ===                                                                      ===
     ============================================================================
     """)
@@ -96,7 +96,7 @@ language = 'zh_CN'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build', '**/*_en*', '*_en*', 'api/*', '**/*hidden.*', '**/*.en*', '*.en*', ]
+exclude_patterns = ['_build', '**/*_en*', '*_en*', '**/*hidden.*', '**/*.en*', '*.en*', ]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.

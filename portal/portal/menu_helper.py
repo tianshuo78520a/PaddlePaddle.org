@@ -207,7 +207,7 @@ def get_content_navigation(request, content_id, language, version):
             # if the version is '0.14.0', we only show
             # 'Documentation' and 'API'. Otherwise, show all
             # ['Documentation', 'API', 'Book', 'Models', 'Mobile']
-            valid_navigation_items = settings.SIDE_NAVIGATION[:2]
+            valid_navigation_items = settings.SIDE_NAVIGATION[:1]
 
     navigation = { 'sections': [] }
     for index, side_navigation_item in enumerate(valid_navigation_items):
@@ -261,9 +261,6 @@ def _get_menu_path(menu_filename, content_id):
     if os.path.basename(repo_path['dir'].rstrip('/')).lower() in ['paddle', 'fluiddoc']:
         # HACK: To support multiple API versions.
         repo_path['dir'] = os.path.join(repo_path['dir'], 'doc', 'fluid')
-
-        if content_id == 'api':
-            repo_path['dir'] = os.path.join(repo_path['dir'], 'api')
 
     if os.path.exists(repo_path['dir']):
         found_menu_path = _find_menu_in_repo(repo_path['dir'], menu_filename)

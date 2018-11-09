@@ -31,15 +31,7 @@ def transform(source_dir, destination_dir, content_id, version, lang=None):
     print 'Processing docs at %s to %s' % (source_dir, destination_dir)
 
     # Regenerate its contents.
-    if content_id in ['docs', 'api']:
-        # If this is called from the CI, often with no language,
-        # generate API docs too.
-        if settings.ENV in ['production', 'staging']:
-            documentation(
-                os.path.join(source_dir, 'api'),
-                destination_dir, 'api', version, lang
-            )
-
+    if content_id == 'docs':
         documentation(source_dir, destination_dir, content_id, version, lang)
 
     elif content_id == 'book':
@@ -327,7 +319,7 @@ def book(source_dir, destination_dir, version, lang):
             # Avoid parsing PaddlePaddle.org folder
             if 'PaddlePaddle.org' in subdir:
                 continue
-                
+
             for file in all_files:
                 subpath = os.path.join(subdir, file)[len(
                     source_dir):]
@@ -749,7 +741,7 @@ def reserve_formulas(markdown_body, formula_map, only_reserve_double_dollar=Fals
 #             m = re.findall('(\$\$[^\$]+\$\$)', body)
 #         else:
 #             m = re.findall('(\$\$?[^\$]+\$?\$)', body)
-            
+
         if only_reserve_double_dollar:
             m = re.findall('(\`?\$\$[^\$\n]+\$\$\`?)', body)
         else:

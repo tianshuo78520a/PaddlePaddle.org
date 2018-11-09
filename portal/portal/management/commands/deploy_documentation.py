@@ -31,9 +31,6 @@ class Command(BaseCommand):
         if not os.path.exists(menu_dir):
             os.makedirs(menu_dir)
 
-        if content_id == 'api':
-            source_dir = os.path.join(source_dir, 'api')
-
         menu_file_path = menu_helper._find_menu_in_repo(source_dir, 'menu.json')
 
         if menu_file_path == None:
@@ -65,8 +62,6 @@ class Command(BaseCommand):
                 source_dir = os.path.join(source_dir, 'doc', 'v2')
             else:
                 source_dir = os.path.join(source_dir, 'doc', 'fluid')
-
-            menus_to_save.append('api')
 
         # Using the new Fluid doc to deploy. Deploy all modules under external
         # Note: This should include 'docs' if possible, but 'docs' requires building Paddle.

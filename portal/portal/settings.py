@@ -60,6 +60,14 @@ SIDE_NAVIGATION = [
     },
     {
         'title': {
+            'en':'API',
+            'zh':'API'
+        },
+        'path': '/api',
+        'dir': os.environ.get('PADDLE_PATH', None)
+    },
+    {
+        'title': {
             'en':'Book',
             'zh':u'\u6df1\u5ea6\u5b66\u4e60101'
         },

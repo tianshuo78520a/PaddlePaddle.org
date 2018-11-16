@@ -83,11 +83,23 @@ class Command(BaseCommand):
 
     def build_document(self, source_dir, lang):
         existing_docs_count = self.get_docs_count() + 1
+        apis_processed = False
 
         for subdir, dirs, all_files in os.walk(source_dir):
             for file in all_files:
                 subpath = os.path.join(subdir, file)
                 (name, extension) = os.path.splitext(file)
+
+                # HACK: After version 1.1, API docs are within "docs", unlike before.
+                # If we find this repo to contain an "api" directory under
+                # documentation/docs/<language>/<version>/, send it
+                # to be processed as a API folder.
+                subpath_pieces = subpath.split('/')
+                if len(subpath_pieces) > 5 and subpath_pieces[1] == 'docs' and (
+                    subpath_pieces[4] == 'api' and not apis_processed):
+
+                    self.build_api_document(subdir)
+                    apis_processed = True
 
                 if extension == '.html':
                     document = {

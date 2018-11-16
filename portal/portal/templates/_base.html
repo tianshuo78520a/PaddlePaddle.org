@@ -255,9 +255,18 @@
                           sync(idx.search(getSearchQuery(query)).map((result) => {
                               item = indexPathMap[result.ref];
 
-                              var apiPath = '/documentation/api/';
-                              if (item.path.substring(0, apiPath.length) === apiPath)
-                                item.isAPI = true;
+                              var apiPath = '/documentation/api/',
+                                  urlPieces = item.path.split('/');
+
+                              if (
+                                  // For pre version 1.1.
+                                  (item.path.substring(0, apiPath.length) === apiPath) || (
+
+                                  // For version 1.1 and ahead.
+                                  (urlPieces.length > 5 && urlPieces[2] === 'docs' && (
+                                      urlPieces[5] === 'api')))
+                              )
+                                  item.isAPI = true;
 
                               var modelsPath = '/documentation/models/';
                               if (item.path.substring(0, modelsPath.length) === modelsPath)

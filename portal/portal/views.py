@@ -521,6 +521,9 @@ def contact(request):
 def tracked_download(request):
     url = request.GET.get('url', None)
 
+    if not url:
+        raise Http404
+
     acceptable_sources = ['paddlepaddle.org', 'wiki.baidu.com', 'github.com']
     acceptable_extension = '.whl'
 
@@ -528,7 +531,7 @@ def tracked_download(request):
     try:
         referer = urlparse(request.META.get('HTTP_REFERER'))
 
-        if referer.netloc not in acceptable_sources or not referer.path.endswith(
+        if referer.netloc not in acceptable_sources or not url.endswith(
             acceptable_extension):
             raise Http404
 
@@ -569,7 +572,7 @@ def tracked_download(request):
             }
 
             for acceptable_source in acceptable_sources:
-                fields[referer.netloc] = 1 if referer.netloc == acceptable_source else 0
+                fields[acceptable_source] = 1 if referer.netloc == acceptable_source else 0
 
             requests.post(settings.AIRTABLE_WHEEL_DOWNLOADS, headers = {
                 'Authorization': 'Bearer ' + settings.AIRTABLE_API_KEY,

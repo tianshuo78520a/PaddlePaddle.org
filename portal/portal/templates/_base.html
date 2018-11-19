@@ -176,8 +176,8 @@
             initialized: false,
 
             data: [
-                '/static/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/index.js',
-                '/static/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/toc.js'
+                '/static/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/index.js?{% server_start_time %}',
+                '/static/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/toc.js?{% server_start_time %}'
             ],
 
             loadedCount: 0,

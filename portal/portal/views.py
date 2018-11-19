@@ -20,6 +20,7 @@ from urlparse import urlparse, parse_qs
 import json
 import datetime
 import pytz
+import dateutil.parser
 
 from django.template.loader import get_template
 from django.shortcuts import render, redirect
@@ -515,3 +516,72 @@ def contact(request):
     }))
 
     return JsonResponse({})
+
+
+def tracked_download(request):
+    url = request.GET.get('url', None)
+
+    acceptable_sources = ['paddlepaddle.org', 'wiki.baidu.com', 'github.com']
+    acceptable_extension = '.whl'
+
+    # Make sure that the referer is either PaddlePaddle.org or wiki.baidu.com or github.
+    try:
+        referer = urlparse(request.META.get('HTTP_REFERER'))
+
+        if referer.netloc not in acceptable_sources or not referer.path.endswith(
+            acceptable_extension):
+            raise Http404
+
+        # [Roughly] Determine if the IP of this request is within Baidu, internally.
+        remote_ip = request.META.get('REMOTE_ADDR')
+        is_internal_ip = False
+
+        # Fetch the newest data on downloads, for the current date.
+        last_record = requests.get(settings.AIRTABLE_WHEEL_DOWNLOADS + (
+            '?maxRecords=1&view=Grid%20view&sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=desc'), headers = {
+            'Authorization': 'Bearer ' + settings.AIRTABLE_API_KEY
+        }).json()['records'][0]
+
+        beijing_timezone = pytz.timezone('Asia/Shanghai')
+        last_date = dateutil.parser.parse(last_record['fields']['Date']).replace(
+            tzinfo=beijing_timezone)
+
+        today = datetime.datetime.now(beijing_timezone)
+        today.replace(hour=0, minute=0, second=0)
+
+        # Increment or decrement the counter for the referer field.
+        # Either create a new record or update an existing one based on whether
+        # one has been created or not.
+        if last_date.year == today.year and last_date.month == today.month and last_date.day == today.day:
+            requests.patch(settings.AIRTABLE_WHEEL_DOWNLOADS + '/' + last_record['id'], headers = {
+                'Authorization': 'Bearer ' + settings.AIRTABLE_API_KEY,
+                'Content-type': 'application/json'
+            }, data = json.dumps({
+                'fields': {
+                    referer.netloc: last_record['fields'][referer.netloc] + 1
+                }
+            }))
+
+        else:
+            fields = {
+                'Date': today.strftime('%Y-%m-%d'),
+                '公司内部用户': is_internal_ip
+            }
+
+            for acceptable_source in acceptable_sources:
+                fields[referer.netloc] = 1 if referer.netloc == acceptable_source else 0
+
+            requests.post(settings.AIRTABLE_WHEEL_DOWNLOADS, headers = {
+                'Authorization': 'Bearer ' + settings.AIRTABLE_API_KEY,
+                'Content-type': 'application/json'
+            }, data = json.dumps({
+                'fields': fields
+            }))
+
+    except Exception, e:
+        # NOTE: We allow this to pass.
+        # We do not complain about this because it allows people to copy and
+        # paste URLs, which should be a supported web practice.
+        pass
+
+    return redirect(url)

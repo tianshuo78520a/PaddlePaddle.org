@@ -71,6 +71,8 @@ urlpatterns = [
     url(r'^reload-docs$', views.reload_docs, name='reload_docs'),
     url(r'^get-menu$', views.get_menu, name='get_menu'),
     url(r'^save-menu$', views.save_menu, name='save_menu'),
+    url(r'^download$', views.tracked_download, name='tracked_download'),
+
 
     # ---------------
     # CONTENT URLS

@@ -172,12 +172,14 @@
         <script src="/static/js/lunr.js"></script>
         <script>
 
+        var dataSuffix = {% if settings.ENV == 'development' %}''{% else %}'.gz'{% endif %};
+
         var Search = {
             initialized: false,
 
             data: [
-                '/static/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/index.js?{% server_start_time %}',
-                '/static/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/toc.js?{% server_start_time %}'
+                '/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/index.js' + dataSuffix + '?{% server_start_time %}',
+                '/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/toc.js' + dataSuffix + '?{% server_start_time %}'
             ],
 
             loadedCount: 0,
@@ -310,7 +312,10 @@
                 for (i = 0; i < Search.data.length; i++){
                     script = document.createElement('script');
                     script.onload = Search.onDataLoad;
-                    script.src = Search.data[i];
+
+                    var prefix = {% if settings.ENV == 'development' %}'/static'{% else %}'//s3-ap-southeast-1.amazonaws.com/paddlepaddle.org'{% endif %};
+
+                    script.src = prefix + Search.data[i];
 
                     document.body.appendChild(script);
                 }

@@ -177,9 +177,11 @@
         var Search = {
             initialized: false,
 
+            // TMP hack, see HACK note below on not using S3 for now.
+            // The empty string should eventually be replaced with `dataSuffix`
             data: [
-                '/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/index.js' + dataSuffix + '?{% server_start_time %}',
-                '/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/toc.js' + dataSuffix + '?{% server_start_time %}'
+                '/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/index.js' + '' + '?{% server_start_time %}',
+                '/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/toc.js'  + '' + '?{% server_start_time %}'
             ],
 
             loadedCount: 0,

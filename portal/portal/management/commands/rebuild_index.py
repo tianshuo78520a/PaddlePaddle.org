@@ -36,6 +36,27 @@ def jieba_zh_string(token):
     return ', '.join(chinese_seg_list)
 
 
+"""
+Primarily done to reduce index size, may be reversed in future.
+"""
+def filter_insignificant_tokens(stripped_strings):
+    digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+    # Reserving them for the API.
+    special_characters = ['=', '/', '_', '.']
+
+    filtered_string = ''
+
+    for stripped_string in stripped_strings:
+        filtered_string += ' '.join([token for token in stripped_string.split(' ') if token and not (
+            (token[0] in digits) or any(
+                special_character in token for special_character in special_characters
+            )
+        )])
+
+    return filtered_string
+
+
 # The class must be named Command, and subclass BaseCommand
 class Command(BaseCommand):
     # Show this when the user types help
@@ -146,7 +167,9 @@ class Command(BaseCommand):
                         # Segment the Chinese sentence through jieba library
                         # Temporarily jieba-ing even content.
                         # if lang == 'zh':
-                        document['content'] = jieba_zh_string(soup.stripped_strings)
+                        document['content'] = jieba_zh_string(
+                            filter_insignificant_tokens(soup.stripped_strings)
+                        )
                         # else:
                         #     document['content'] = ', '.join(soup.stripped_strings)
 

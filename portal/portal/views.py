@@ -529,9 +529,11 @@ def tracked_download(request):
     acceptable_extension = '.whl'
 
     # Make sure that the referer is either PaddlePaddle.org or wiki.baidu.com or github.
-    referer = urlparse(request.META.get('HTTP_REFERER'), None)
+    referer = request.META.get('HTTP_REFERER', None)
 
     if referer:
+        referer = urlparse(referer)
+
         if referer.netloc not in acceptable_sources or not url.endswith(
             acceptable_extension):
             raise Http404

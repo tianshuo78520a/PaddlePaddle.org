@@ -539,7 +539,7 @@ def tracked_download(request):
             raise Http404
 
         # [Roughly] Determine if the IP of this request is within Baidu, internally.
-        remote_ip = request.META.get('REMOTE_ADDR')
+        remote_ip = get_client_ip(request)
         is_internal_ip = ip_in_internal_range(unicode(remote_ip))
 
         # Fetch the newest data on downloads, for the current date.
@@ -596,6 +596,19 @@ def tracked_download(request):
         pass
 
     return redirect(url)
+
+
+# Adopted from https://stackoverflow.com/questions/4581789/how-do-i-get-user-ip-address-in-django
+# and tested against current server setup.
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
+    return ip
 
 
 """

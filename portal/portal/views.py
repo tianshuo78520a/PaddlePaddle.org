@@ -529,9 +529,9 @@ def tracked_download(request):
     acceptable_extension = '.whl'
 
     # Make sure that the referer is either PaddlePaddle.org or wiki.baidu.com or github.
-    try:
-        referer = urlparse(request.META.get('HTTP_REFERER'))
+    referer = urlparse(request.META.get('HTTP_REFERER'), None)
 
+    if referer:
         if referer.netloc not in acceptable_sources or not url.endswith(
             acceptable_extension):
             raise Http404
@@ -587,7 +587,7 @@ def tracked_download(request):
                 'fields': fields
             }))
 
-    except Exception, e:
+    else:
         # NOTE: We allow this to pass.
         # We do not complain about this because it allows people to copy and
         # paste URLs, which should be a supported web practice.

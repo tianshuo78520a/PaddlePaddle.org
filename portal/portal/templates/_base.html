@@ -180,8 +180,8 @@
             // TMP hack, see HACK note below on not using S3 for now.
             // The empty string should eventually be replaced with `dataSuffix`
             data: [
-                '/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/index.js' + '' + '?{% server_start_time %}',
-                '/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/toc.js'  + '' + '?{% server_start_time %}'
+                '//paddle-org.bj.bcebos.com/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/index.js' + '' + '?{% server_start_time %}',
+                '/static/indexes/{{ lang }}/{{ CURRENT_DOCS_VERSION }}/toc.js'  + '' + '?{% server_start_time %}'
             ],
 
             loadedCount: 0,
@@ -320,7 +320,7 @@
                     // HACK: Originally decided to use S3, but until
                     // S3 performance issue in China is not resolved,
                     // serve from local copy.
-                    script.src = '/static' + Search.data[i];
+                    script.src = /*'/static' + */Search.data[i];
 
                     document.body.appendChild(script);
                 }

@@ -622,10 +622,8 @@ if __name__ == "__main__":
         <div class="modal-dialog modal-dialog-video" role="document">
             <div class="modal-content">
                 <video controls width="640px" height="360px" id="videoControl">
-                    <source id="videoLink" src="https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/paddlepaddle%E5%B8%B8%E8%A7%84%E7%89%881080P.mp4"
-                            type="video/mp4">
-                    <source id="videoWebm" src="https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/paddlepaddle%E5%B8%B8%E8%A7%84%E7%89%881080P.webm"
-                            type="video/webm">
+                    <source id="videoLink" type="video/mp4">
+                    <source id="videoWebm" type="video/webm">
                     <p>Your browser doesn't support HTML5 video.</p>
                 </video>
             </div>
@@ -798,6 +796,8 @@ if __name__ == "__main__":
             });
         }
     }
+
+    updateVideo();
 
     $('#videoModal').on('show.bs.modal', function (e) {
         var video = document.getElementById('videoControl');

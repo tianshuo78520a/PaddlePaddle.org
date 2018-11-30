@@ -77,7 +77,7 @@ msgstr "使用文档"
 
 #: portal/templates/_base.html:11
 msgid "PaddlePaddle - Train and deploy deep learning at scale"
-msgstr ""
+msgstr "PaddlePaddle-百度自主研发的适合中国企业和开发者的深度学习平台"
 
 #: portal/templates/_nav_bar.html:26
 msgid "About"

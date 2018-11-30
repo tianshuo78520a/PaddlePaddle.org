@@ -108,7 +108,14 @@
                         </div>
                     </a>
                 </div>
-                
+
+                <div class="carousel-item">
+                    <a href="http://ai.baidu.com/support/news?action=detail&id=637&hmsr=aibanner&hmpl=huangpu" target="_blank">
+                        <div class="huangpu-banner py-5">
+                        </div>
+                    </a>
+                </div>
+
                 {% endif %}
             </div>
             {% if LANGUAGE_CODE == 'zh' %}
@@ -615,10 +622,8 @@ if __name__ == "__main__":
         <div class="modal-dialog modal-dialog-video" role="document">
             <div class="modal-content">
                 <video controls width="640px" height="360px" id="videoControl">
-                    <source id="videoLink" src="https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/paddlepaddle%E5%B8%B8%E8%A7%84%E7%89%881080P.mp4"
-                            type="video/mp4">
-                    <source id="videoWebm" src="https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/paddlepaddle%E5%B8%B8%E8%A7%84%E7%89%881080P.webm"
-                            type="video/webm">
+                    <source id="videoLink" type="video/mp4">
+                    <source id="videoWebm" type="video/webm">
                     <p>Your browser doesn't support HTML5 video.</p>
                 </video>
             </div>
@@ -740,8 +745,8 @@ if __name__ == "__main__":
     }
     var videoTitles = ['PaddlePaddle，让AI触手可及', '“桃子分拣机对我的帮助非常大”', 'AI会发现并记录你在公共场所的不良行为'];
     var videoDescs = ['PaddlePaddle是一个开源的深度学习引擎，能够帮助你快速高效地实现任何想要的AI创意', '四个大学生用一个假期时间，基于PaddlePaddle平台打造了通过外观、尺寸等特征进行桃子质量分级的机器，帮助桃农节约了大量劳动成本', '百度员工打造的AI控烟方案，当你在禁止吸烟的公共场所吸烟时，就会被AI实时捕捉并将你的吸烟图像投放至附近的屏幕上'];
-    var videoLinks = ['https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/paddlepaddle%E5%B8%B8%E8%A7%84%E7%89%881080P.mp4', 'https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/1.+%E5%A4%A7%E6%A1%83%E7%BA%AA%E5%BD%95%E7%89%87%E6%9C%80%E7%BB%88%E7%89%88+%E9%AB%98%E6%B8%85%E7%89%88.mp4', 'https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/%E7%99%BE%E5%BA%A6%E6%97%A0%E7%83%9F%E6%97%A5%E7%97%85%E6%AF%92%E8%A7%86%E9%A2%91_%E5%86%85%E9%83%A8_final.mp4']
-    var videoWebm = ['https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/paddlepaddle%E5%B8%B8%E8%A7%84%E7%89%881080P.webm', 'https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/1.+%E5%A4%A7%E6%A1%83%E7%BA%AA%E5%BD%95%E7%89%87%E6%9C%80%E7%BB%88%E7%89%88+%E9%AB%98%E6%B8%85%E7%89%88.webm', 'https://s3-ap-southeast-1.amazonaws.com/paddlepaddle.org/videos/%E7%99%BE%E5%BA%A6%E6%97%A0%E7%83%9F%E6%97%A5%E7%97%85%E6%AF%92%E8%A7%86%E9%A2%91_%E5%86%85%E9%83%A8_final.webm']
+    var videoLinks = ['http://paddle-org.bj.bcebos.com/videos/paddlepaddle%E5%B8%B8%E8%A7%84%E7%89%881080P.mp4', 'http://paddle-org.bj.bcebos.com/videos/1.%20%E5%A4%A7%E6%A1%83%E7%BA%AA%E5%BD%95%E7%89%87%E6%9C%80%E7%BB%88%E7%89%88%20%E9%AB%98%E6%B8%85%E7%89%88.mp4', 'http://paddle-org.bj.bcebos.com/videos/%E7%99%BE%E5%BA%A6%E6%97%A0%E7%83%9F%E6%97%A5%E7%97%85%E6%AF%92%E8%A7%86%E9%A2%91_%E5%86%85%E9%83%A8_final.mp4']
+    var videoWebm = ['http://paddle-org.bj.bcebos.com/videos/paddlepaddle%E5%B8%B8%E8%A7%84%E7%89%881080P.webm', 'http://paddle-org.bj.bcebos.com/videos/1.%20%E5%A4%A7%E6%A1%83%E7%BA%AA%E5%BD%95%E7%89%87%E6%9C%80%E7%BB%88%E7%89%88%20%E9%AB%98%E6%B8%85%E7%89%88.webm', 'http://paddle-org.bj.bcebos.com/videos/%E7%99%BE%E5%BA%A6%E6%97%A0%E7%83%9F%E6%97%A5%E7%97%85%E6%AF%92%E8%A7%86%E9%A2%91_%E5%86%85%E9%83%A8_final.webm']
 
     var videoBGs = ['/static/images/explaining-paddlers.png', '/static/images/peach-paddlers.png', '/static/images/smoking-paddlers.png']
     var count = 0;
@@ -791,6 +796,8 @@ if __name__ == "__main__":
             });
         }
     }
+
+    updateVideo();
 
     $('#videoModal').on('show.bs.modal', function (e) {
         var video = document.getElementById('videoControl');

@@ -66,7 +66,7 @@ class Command(BaseCommand):
         # Using the new Fluid doc to deploy. Deploy all modules under external
         # Note: This should include 'docs' if possible, but 'docs' requires building Paddle.
         # Building Paddle will most likely timeout the CI Job.
-        # In later version(1.2) Everythong is included in the
+        # In later version(1.2) Everythong is included in the doc tree
         if content_id == 'external':
             if version < '1.2':
                 content_ids = ['book', 'paddle-mobile', 'models']

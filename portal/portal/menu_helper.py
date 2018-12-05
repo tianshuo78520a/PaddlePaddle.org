@@ -212,10 +212,11 @@ def get_content_navigation(request, content_id, language, version):
 
                 if version >= '1.1':
                     valid_navigation_items = settings.SIDE_NAVIGATION[:1]
-
+        elif language == 'en' and (version >= '1.2' or version == 'develop_doc' or version == 'develop'):
+            valid_navigation_items = (settings.SIDE_NAVIGATION[:1])
         elif language == 'en' and version >= '1.1':
-            valid_navigation_items = (
-                settings.SIDE_NAVIGATION[:1]) + settings.SIDE_NAVIGATION[2:]
+            # The older version, like 1.0, should include book, models, mobile ([2:])
+            valid_navigation_items = (settings.SIDE_NAVIGATION[:1]) + settings.SIDE_NAVIGATION[2:]
 
 
     navigation = { 'sections': [] }

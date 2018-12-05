@@ -66,18 +66,20 @@ class Command(BaseCommand):
         # Using the new Fluid doc to deploy. Deploy all modules under external
         # Note: This should include 'docs' if possible, but 'docs' requires building Paddle.
         # Building Paddle will most likely timeout the CI Job.
-        if content_id == 'external':
-            content_ids = ['book', 'paddle-mobile', 'models']
+        # In later version(1.2) Everythong is included in the doc tree
+        elif content_id == 'external':
+            if version < '1.2':
+                content_ids = ['book', 'paddle-mobile', 'models']
 
-            for content_id in content_ids:
-                transform(
-                    source_dir + '/' + content_id, options.get('destination_dir', None),
-                    content_id, version, None
-                )
+                for content_id in content_ids:
+                    transform(
+                        source_dir + '/' + content_id, options.get('destination_dir', None),
+                        content_id, version, None
+                    )
 
-                if content_id not in ['models', 'paddle-mobile', 'mobile']:
-                    for lang in ['en', 'zh']:
-                        self.save_menu(source_dir, content_id, lang, version)
+                    if content_id == 'book':
+                        for lang in ['en', 'zh']:
+                            self.save_menu(source_dir, content_id, lang, version)
 
         else:
             menus_to_save.append(content_id)

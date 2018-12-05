@@ -77,7 +77,7 @@ class Command(BaseCommand):
                         content_id, version, None
                     )
 
-                    if content_id not in ['models', 'paddle-mobile', 'mobile']:
+                    if content_id == 'book':
                         for lang in ['en', 'zh']:
                             self.save_menu(source_dir, content_id, lang, version)
 

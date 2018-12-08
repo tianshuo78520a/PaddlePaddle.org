@@ -168,7 +168,7 @@
         {% block scripts %}
         <!-- Setup search -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-        <script src="//twitter.github.com/typeahead.js/releases/latest/typeahead.jquery.min.js"></script>
+        <script src="//paddle-org.bj.bcebos.com/js/typeahead.jquery.min.js"></script>
 
         <script src="/static/js/lunr.js"></script>
         <script>
@@ -269,7 +269,7 @@
 
                                   // For version 1.1 and ahead.
                                   (urlPieces.length > 5 && urlPieces[2] === 'docs' && (
-                                      urlPieces[5] === 'api')))
+                                      ['api', 'api_cn'].indexOf(urlPieces[5]) !== -1 )))
                               )
                                   item.isAPI = true;
 

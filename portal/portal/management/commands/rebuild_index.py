@@ -31,7 +31,18 @@ def get_section_for_api_title(title, depth=0):
     return None
 
 
-def jieba_zh_string(token):
+def jieba_zh_title(raw_title):
+    segments = jieba.cut_for_search(raw_title)
+    joined_segments = ''
+
+    for segment in segments:
+        if len(segment.strip()):
+            joined_segments += ' ' + segment
+
+    return joined_segments.strip()
+
+
+def jieba_zh_content(token):
     chinese_seg_list = [' '.join(jieba.cut_for_search(s)) for s in token]
     return ', '.join(chinese_seg_list)
 
@@ -72,7 +83,7 @@ class Command(BaseCommand):
             '--content_id', action='store', default=None, dest='content_id')
 
 
-    def build_api_document(self, source_dir):
+    def build_api_document(self, source_dir, lang):
         existing_docs_count = self.get_docs_count() + 1
 
         for subdir, dirs, all_files in os.walk(source_dir):
@@ -88,13 +99,21 @@ class Command(BaseCommand):
                         for api_call in soup.find_all(re.compile('^h(1|2|3)')):
                             parent_section = get_section_for_api_title(api_call)
 
+                            title = next(api_call.stripped_strings)
+                            content = parent_section.strings if parent_section else ''
+
+                            if lang == 'zh':
+                                content = jieba_zh_content(content) if content else content
+                            elif content:
+                                content = '. '.join(content)
+
                             try:
                                 self.api_documents.append({
                                     'id': existing_docs_count,
                                     'path': '/' + subpath + (api_call.a['href'] if (api_call.a and api_call.a.has_attr('href')) else ''),
-                                    'title': str(next(api_call.stripped_strings).encode('utf-8')),
+                                    'title': str(title.encode('utf-8')),
                                     'prefix': os.path.splitext(os.path.basename(name))[0] if '.' in name else '',
-                                    'content': '. '.join(parent_section.strings).encode('utf-8') if parent_section else ''
+                                    'content': content.encode('utf-8')
                                 })
                                 existing_docs_count += 1
 
@@ -102,7 +121,7 @@ class Command(BaseCommand):
                                 print("Unable to parse the file at: %s" % subpath)
 
 
-    def build_document(self, source_dir, lang):
+    def build_document(self, source_dir, lang, version):
         existing_docs_count = self.get_docs_count() + 1
         apis_processed = False
 
@@ -119,7 +138,9 @@ class Command(BaseCommand):
                 if len(subpath_pieces) > 5 and subpath_pieces[1] == 'docs' and (
                     subpath_pieces[4] in ['api', 'api_cn'] and not apis_processed):
 
-                    self.build_api_document(subdir)
+                    # This means that anything before 1.2 should be treated as English
+                    # because there was no Chinese API before that.
+                    self.build_api_document(subdir, lang if version >= '1.2' else 'en')
                     apis_processed = True
 
                 if extension == '.html':
@@ -146,14 +167,7 @@ class Command(BaseCommand):
                             raw_title = next(title.stripped_strings)
 
                             if lang == 'zh':
-                                segments = jieba.cut_for_search(raw_title)
-                                joined_segments = ''
-
-                                for segment in segments:
-                                    if len(segment.strip()):
-                                        joined_segments += ' ' + segment
-
-                                document['title'] = joined_segments.strip()
+                                document['title'] = jieba_zh_title(raw_title)
                                 document['displayTitle'] = raw_title
 
                             else:
@@ -167,7 +181,7 @@ class Command(BaseCommand):
                         # Segment the Chinese sentence through jieba library
                         # Temporarily jieba-ing even content.
                         # if lang == 'zh':
-                        document['content'] = jieba_zh_string(
+                        document['content'] = jieba_zh_content(
                             filter_insignificant_tokens(soup.stripped_strings)
                         )
                         # else:
@@ -205,10 +219,10 @@ class Command(BaseCommand):
             )
 
             if content_to_build == 'api' and version not in ['0.10.0', '0.11.0']:
-                self.build_api_document(source_dir)
+                self.build_api_document(source_dir, 'en')
 
             else:
-                self.build_document(source_dir, options['language'][0])
+                self.build_document(source_dir, options['language'][0], version)
 
 
         # And create an index JS file that we can import.

@@ -32,7 +32,7 @@ mkdir -p $DESTINATION_DIR
 
 if [ "$LANGUAGE" == "en" ]; then
     make -j $processors visualdl_docs_en
-    cp -r $DOCS_LOCATION/build/docs/en/html/ $DESTINATION_DIR/en/
+    cp -r $DOCS_LOCATION/build/docs/en/html/ $DESTINATION_DIR/en
 
 elif [ "$LANGUAGE" == "zh" ]; then
     make -j $processors visualdl_docs_cn
@@ -40,6 +40,6 @@ elif [ "$LANGUAGE" == "zh" ]; then
 
 else
     make -j $processors visualdl_docs_en visualdl_docs_cn
-    cp -r $DOCS_LOCATION/build/docs/en/html $DESTINATION_DIR/visualdl/en/develop/.
-    cp -r $DOCS_LOCATION/build/docs/cn/html $DESTINATION_DIR/visualdl/zh/develop/.
+    cp -r $DOCS_LOCATION/build/docs/en/html/ $DESTINATION_DIR/en
+    cp -r $DOCS_LOCATION/build/docs/cn/html/ $DESTINATION_DIR/zh
 fi

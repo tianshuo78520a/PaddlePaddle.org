@@ -89,7 +89,9 @@ class Command(BaseCommand):
                 content_id, version, None
             )
 
-            if content_id not in ['models', 'mobile']:
+            # Added docs and visualdl ever since we started saving the menu
+            # inside transform.
+            if content_id not in ['models', 'mobile', 'docs', 'visualdl']:
                 for lang in ['en', 'zh']:
                     for menu_to_save_content_id in menus_to_save:
                         self.save_menu(source_dir, menu_to_save_content_id, lang, version)

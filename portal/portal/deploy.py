@@ -56,7 +56,7 @@ def documentation(source_dir, destination_dir, version, original_lang):
     headers, and body.
     """
     try:
-        menu_path = menu_helper.get_menu('docs', original_lang, version)[1]
+        menu_path = menu_helper.get_menu('docs', original_lang or 'en', version)[1]
     except IOError, e:
         menu_path = e[1]
 
@@ -108,6 +108,12 @@ def documentation(source_dir, destination_dir, version, original_lang):
     if new_menu:
         with open(menu_path, 'w') as menu_file:
             menu_file.write(json.dumps(new_menu, indent=4))
+
+        # Because this only happens in production, and we do 'en' above temporarily.
+        if not original_lang:
+            copyfile(menu_path, menu_helper.get_production_menu_path(
+                'docs', 'zh', version))
+
     else:
         _remove_sphinx_menu(menu_path, lang)
 
@@ -415,7 +421,7 @@ def visualdl(source_dir, destination_dir, version, original_lang):
     and after parsing the code base based on given config, into an output dir.
     """
     try:
-        menu_path = menu_helper.get_menu('visualdl', original_lang, version)[1]
+        menu_path = menu_helper.get_menu('visualdl', original_lang or 'en', version)[1]
     except IOError, e:
         menu_path = e[1]
 
@@ -459,6 +465,12 @@ def visualdl(source_dir, destination_dir, version, original_lang):
             if new_menu:
                 with open(menu_path, 'w') as menu_file:
                     menu_file.write(json.dumps(new_menu, indent=4))
+
+                # Because this only happens in production, and we do 'en' above temporarily.
+                if not original_lang:
+                    copyfile(menu_path, menu_helper.get_production_menu_path(
+                        'visualdl', 'zh', version))
+
             else:
                 _remove_sphinx_menu(menu_path, lang)
 

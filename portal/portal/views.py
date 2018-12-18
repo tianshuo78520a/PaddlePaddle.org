@@ -130,7 +130,7 @@ def _find_matching_equivalent_page_for(path, request, lang=None, version=None):
             if lang:
                 # HACK: Since we failed to find a way make a merged menu.json.
                 new_menu_path = menu_helper.get_menu_path_cache(
-                    content_id, lang, version)
+                    content_id, lang, old_version)
 
                 with open(new_menu_path, 'r') as new_menu_file:
                     new_menu = json.loads(new_menu_file.read())

@@ -106,14 +106,7 @@ def documentation(source_dir, destination_dir, version, original_lang):
         # shutil.rmtree(generated_dir)
 
     if new_menu:
-        with open(menu_path, 'w') as menu_file:
-            menu_file.write(json.dumps(new_menu, indent=4))
-
-        # Because this only happens in production, and we do 'en' above temporarily.
-        if not original_lang:
-            copyfile(menu_path, menu_helper.get_production_menu_path(
-                'docs', 'zh', version))
-
+        _save_menu(new_menu, menu_path, 'docs', original_lang, version)
     else:
         _remove_sphinx_menu(menu_path, lang)
 
@@ -463,14 +456,7 @@ def visualdl(source_dir, destination_dir, version, original_lang):
                 )
 
             if new_menu:
-                with open(menu_path, 'w') as menu_file:
-                    menu_file.write(json.dumps(new_menu, indent=4))
-
-                # Because this only happens in production, and we do 'en' above temporarily.
-                if not original_lang:
-                    copyfile(menu_path, menu_helper.get_production_menu_path(
-                        'visualdl', 'zh', version))
-
+                _save_menu(new_menu, menu_path, 'visualdl', original_lang, version)
             else:
                 _remove_sphinx_menu(menu_path, lang)
 
@@ -823,3 +809,19 @@ def prepare_internal_urls(soup, lang, version):
         )
 
         del link['repo']
+
+
+def _save_menu(menu, menu_path, content_id, original_lang, version):
+    if menu:
+        menu_dir = os.path.dirname(menu_path)
+
+        if not os.path.exists(menu_dir):
+            os.makedirs(menu_dir)
+
+        with open(menu_path, 'w') as menu_file:
+            menu_file.write(json.dumps(menu, indent=4))
+
+        # Because this only happens in production, and we do 'en' above temporarily.
+        if not original_lang:
+            copyfile(menu_path, menu_helper.get_production_menu_path(
+                content_id, 'zh', version))

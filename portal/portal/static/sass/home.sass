@@ -10,7 +10,7 @@
         background: transparent
 
         &:hover
-            border: none
+            border-color: $accent-color
             color: white
             background: $accent-color
 
@@ -21,6 +21,40 @@
 
             &:hover
                 background: linear-gradient(to left, $accent-color, $accent-color)
+
+    .survey-banner
+        background-color: #FFD840
+        height: 150px
+        overflow: hidden
+        display: none
+
+        .survey-banner-content
+            text-align: center
+
+            .btn
+                border-color: #FF0000
+                color: #FF0000
+
+                // Weird CSS needed to get middle align.
+                height: 100%
+
+                &:hover
+                    color: #fff
+                    background-color: #FF0000
+
+        .survey-banner-dismiss
+            position: relative
+
+            i
+                position: absolute
+                right: 5%
+                top: -110px
+                font-size: 24px
+                opacity: 0.5
+                cursor: pointer
+
+                &:hover
+                    opacity: 1
 
     .hero-carousel
         height: $hero-carousel-height
@@ -572,8 +606,7 @@
             width: 150px
             padding-top: 10px
             background: black
-            opacity: 0
-            transition: opacity .15s ease-in-out
+            display: none
 
             p
                 font-size: 12px
@@ -585,7 +618,7 @@
                 margin: 15px
 
         .show
-            opacity: 1
+            display: block
 
         .feedback_item
             position: relative

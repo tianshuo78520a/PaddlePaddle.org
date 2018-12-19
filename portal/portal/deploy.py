@@ -823,5 +823,12 @@ def _save_menu(menu, menu_path, content_id, original_lang, version):
 
         # Because this only happens in production, and we do 'en' above temporarily.
         if not original_lang:
-            copyfile(menu_path, menu_helper.get_production_menu_path(
-                content_id, 'zh', version))
+            alternative_menu_path = menu_helper.get_production_menu_path(
+                content_id, 'zh', version)
+
+            menu_dir = os.path.dirname(alternative_menu_path)
+
+            if not os.path.exists(menu_dir):
+                os.makedirs(menu_dir)
+
+            copyfile(menu_path, alternative_menu_path)

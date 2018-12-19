@@ -8,7 +8,7 @@
 <li>
     {% if section.sections == None or not section.sections|length or forloop.parentloop.parentloop.parentloop.counter > 0 %}
         {% if section_link != "" %}
-            <a href="{{ section_link|safe }}" {% if request.path in chapter.sections %} class="active" {% endif %}>{{ section_title }}</a>
+            <a href="{{ section_link|safe }}" {% if request.path in section_link %} class="active" {% endif %}>{{ section_title }}</a>
         {% endif %}
     {% elif section.sections != None %}
         {% if section_link != None %}

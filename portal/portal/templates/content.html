@@ -72,7 +72,10 @@ MathJax.Hub.Config({
                 highlightSideNavActiveLink(link.attr('href'));
             });
         });
-        highlightSideNavActiveLink();
+
+        // NOTE: Temporarily disabling this, because we do not want
+        // to see # being used to determine current page from the menu.
+        // highlightSideNavActiveLink();
     })();
 
     $( document ).on( "content-updated", function( event, arg1, arg2 ) {

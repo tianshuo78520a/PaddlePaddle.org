@@ -15,9 +15,8 @@
 <div class="home">
     {% if LANGUAGE_CODE == 'zh' %}
     <section class="survey-banner">
-        <div class="survey-banner-content m-4">
-            <h3>請問你願意花個一分鐘填寫深度學習的調查嗎?</h3>
-            <p class="m-3"><a class="btn px-5" href="http://wenjuan.baidu.com/?preview_token=fc6d53&sid=26014" target="_blank">一分鐘調查</a></p>
+        <div class="survey-banner-content m-3">
+            <h3><a href="http://wenjuan.baidu.com/?preview_token=fc6d53&sid=26014" target="_blank">深度学习框架及使用场景调研有奖问答</a></h3>
         </div>
         <div class="survey-banner-dismiss">
             <i class="fas fa-times" data-toggle="tooltip" data-placement="right" title="Close"></i>
@@ -878,12 +877,12 @@ if __name__ == "__main__":
         steps.removeClass('show');
     });
 
-    // Slide the survey down on page load (after 1.5 seconds) if the element is found.
     var surveyBanner = $('.survey-banner');
     if (surveyBanner.length){
-        setTimeout(function(){
-            surveyBanner.slideDown();
-        }, 1500);
+        // Slide the survey down on page load (after 1.5 seconds) if the element is found.
+        // setTimeout(function(){
+        //     surveyBanner.slideDown();
+        // }, 1500);
 
         var surveyClose = $('i', surveyBanner);
         surveyClose.tooltip();

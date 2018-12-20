@@ -23,24 +23,15 @@
                 background: linear-gradient(to left, $accent-color, $accent-color)
 
     .survey-banner
-        background-color: #FFD840
-        height: 150px
+        background-color: $gallery
+        height: 60px
         overflow: hidden
-        display: none
 
         .survey-banner-content
             text-align: center
 
-            .btn
-                border-color: #FF0000
-                color: #FF0000
-
-                // Weird CSS needed to get middle align.
-                height: 100%
-
-                &:hover
-                    color: #fff
-                    background-color: #FF0000
+            a:hover
+                text-decoration: underline
 
         .survey-banner-dismiss
             position: relative
@@ -48,7 +39,7 @@
             i
                 position: absolute
                 right: 5%
-                top: -110px
+                top: -40px
                 font-size: 24px
                 opacity: 0.5
                 cursor: pointer

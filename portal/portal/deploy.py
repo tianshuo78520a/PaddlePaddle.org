@@ -32,7 +32,7 @@ def transform(source_dir, destination_dir, content_id, version, lang=None):
 
     # Regenerate its contents.
     if content_id == 'docs':
-        documentation(source_dir, destination_dir, content_id, version, lang)
+        documentation(source_dir, destination_dir, version, lang)
 
     elif content_id == 'book':
         book(source_dir, destination_dir, version, lang)
@@ -50,12 +50,15 @@ def transform(source_dir, destination_dir, content_id, version, lang=None):
 
 ########### Individual content convertors ################
 
-def documentation(source_dir, destination_dir, content_id, version, original_lang):
+def documentation(source_dir, destination_dir, version, original_lang):
     """
     Strip out the static and extract the body contents, ignoring the TOC,
     headers, and body.
     """
-    menu_path = source_dir + '/menu.json'
+    try:
+        menu_path = menu_helper.get_menu('docs', original_lang or 'en', version)[1]
+    except IOError, e:
+        menu_path = e[1]
 
     if original_lang:
         langs = [original_lang]
@@ -73,19 +76,14 @@ def documentation(source_dir, destination_dir, content_id, version, original_lan
             destination_dir = url_helper.get_full_content_path(
                 'docs', lang, version)[0]
 
-        generated_dir = _get_new_generated_dir(content_id, lang)
+        generated_dir = _get_new_generated_dir('docs', lang)
 
         if not new_menu:
             _build_sphinx_index_from_menu(menu_path, lang)
 
-        # HACK: If this is chinese API folder, make a copy of api/index_en.rst.
-        if lang == 'zh' and content_id == 'api':
-            copyfile(
-                os.path.join(source_dir, 'index_en.rst'),
-                os.path.join(source_dir, 'index_cn.rst')
-            )
+        print "Use Sphinx comment: sphinx-build -b html -c %s %s %s" % (
+            os.path.join(settings.SPHINX_CONFIG_DIR, lang), source_dir, generated_dir)
 
-        print "Use Sphinx comment: sphinx-build -b html -c %s %s %s" % (os.path.join(settings.SPHINX_CONFIG_DIR, lang), source_dir, generated_dir)
         call(['sphinx-build', '-b', 'html', '-c',
             os.path.join(settings.SPHINX_CONFIG_DIR, lang),
             source_dir, generated_dir])
@@ -94,36 +92,21 @@ def documentation(source_dir, destination_dir, content_id, version, original_lan
     if new_menu:
         # FORCEFULLY generate for both languages.
         for lang in (['en', 'zh'] if settings.ENV in ['production', 'staging'] else langs):
-            generated_dir = _get_new_generated_dir(content_id, lang)
-            with open(os.path.join(generated_dir, 'index_%s.html' % (
-                'cn' if lang == 'zh' else 'en'))) as index_file:
-                navs = BeautifulSoup(index_file, 'lxml').findAll(
-                    'nav', class_='doc-menu-vertical')
+            _create_sphinx_menu(source_dir, 'docs', lang, version, new_menu)
 
-                assert navs > 0
-
-                links_container = navs[0].find('ul', recursive=False)
-
-                if links_container:
-                    for link in links_container.find_all('li', recursive=False):
-                        _create_sphinx_menu(
-                            new_menu['sections'], link,
-                            'documentation', lang, version, source_dir, content_id == 'docs'
-                        )
     for lang in langs:
         if original_lang:
             lang_destination_dir = destination_dir
         else:
-            lang_destination_dir = os.path.join(destination_dir, content_id, lang, version)
+            lang_destination_dir = os.path.join(destination_dir, 'docs', lang, version)
 
-        generated_dir = _get_new_generated_dir(content_id, lang)
+        generated_dir = _get_new_generated_dir('docs', lang)
         strip_sphinx_documentation(
             source_dir, generated_dir, lang_destination_dir, lang, version)
         # shutil.rmtree(generated_dir)
 
     if new_menu:
-        with open(menu_path, 'w') as menu_file:
-            menu_file.write(json.dumps(new_menu, indent=4))
+        _save_menu(new_menu, menu_path, 'docs', original_lang, version)
     else:
         _remove_sphinx_menu(menu_path, lang)
 
@@ -430,7 +413,11 @@ def visualdl(source_dir, destination_dir, version, original_lang):
     Given a VisualDL doc directory, invoke a script to generate docs using Sphinx
     and after parsing the code base based on given config, into an output dir.
     """
-    # Remove old generated docs directory
+    try:
+        menu_path = menu_helper.get_menu('visualdl', original_lang or 'en', version)[1]
+    except IOError, e:
+        menu_path = e[1]
+
     if os.path.exists(os.path.dirname(source_dir)):
         script_path = os.path.join(
             settings.BASE_DIR, '../scripts/deploy/generate_visualdl_docs.sh')
@@ -438,12 +425,23 @@ def visualdl(source_dir, destination_dir, version, original_lang):
         if os.path.exists(os.path.dirname(script_path)):
             generated_dir = _get_new_generated_dir('visualdl')
 
-            call([script_path, source_dir, generated_dir, original_lang])
-
             if original_lang:
+                call([script_path, source_dir, generated_dir, original_lang])
                 langs = [original_lang]
             else:
+                call([script_path, source_dir, generated_dir])
                 langs = ['en', 'zh']
+
+            new_menu = None
+
+            # Set up new_menu to indicate that we need to parse html to create new menu
+            if not settings.SUPPORT_MENU_JSON:
+                new_menu = { 'sections': [] }
+
+            # Generate a menu from the rst root menu if it doesn't exist.
+            if new_menu:
+                for lang in (['en', 'zh'] if settings.ENV in ['production', 'staging'] else langs):
+                    _create_sphinx_menu(source_dir, 'visualdl', lang, version, new_menu)
 
             for lang in langs:
                 if original_lang:
@@ -453,12 +451,14 @@ def visualdl(source_dir, destination_dir, version, original_lang):
                         destination_dir, 'visualdl', lang, version)
 
                 strip_sphinx_documentation(
-                    # '/Users/aroravarun/Code/VisualDL',
-                    source_dir, generated_dir,
-                    os.path.join(source_dir,
-                        'visualdl',
-                        lang, version),
-                    lang_destination_dir, version)
+                    source_dir, _get_new_generated_dir('visualdl', lang),
+                    lang_destination_dir, lang, version
+                )
+
+            if new_menu:
+                _save_menu(new_menu, menu_path, 'visualdl', original_lang, version)
+            else:
+                _remove_sphinx_menu(menu_path, lang)
 
         else:
             raise Exception('Cannot find script located at %s.' % script_path)
@@ -554,7 +554,28 @@ def strip_sphinx_documentation(source_dir, generated_dir, lang_destination_dir, 
                     copyfile(os.path.join(subdir, file), new_path)
 
 
-def _create_sphinx_menu(parent_list, node, content_id, language, version, source_dir, allow_parent_links=True):
+def _create_sphinx_menu(source_dir, content_id, lang, version, new_menu):
+    generated_dir = _get_new_generated_dir(content_id, lang)
+
+    with open(os.path.join(generated_dir, 'index_%s.html' % (
+        'cn' if lang == 'zh' else 'en'))) as index_file:
+
+        navs = BeautifulSoup(index_file, 'lxml').findAll(
+            'nav', class_='doc-menu-vertical')
+
+        assert navs > 0
+
+        links_container = navs[0].find('ul', recursive=False)
+
+        if links_container:
+            for link in links_container.find_all('li', recursive=False):
+                _build_menu_links(
+                    new_menu['sections'], link, lang, version,
+                    source_dir, content_id == 'docs'
+                )
+
+
+def _build_menu_links(parent_list, node, language, version, source_dir, allow_parent_links=True):
     """
     Recursive function to append links to a new parent list object by going down the
     nested lists inside the HTML, using BeautifulSoup tree parser.
@@ -587,8 +608,8 @@ def _create_sphinx_menu(parent_list, node, content_id, language, version, source
                 node_dict['sections'] = []
 
                 for sub_section in sub_sections:
-                    _create_sphinx_menu(
-                        node_dict['sections'], sub_section, content_id,
+                    _build_menu_links(
+                        node_dict['sections'], sub_section,
                         language, version, source_dir, allow_parent_links)
 
 
@@ -734,13 +755,13 @@ def reserve_formulas(markdown_body, formula_map, only_reserve_double_dollar=Fals
     math = []
     for i in range(len(markdown_body_list)):
         body = markdown_body_list[i].strip(' ')
-#         if body.startswith('`') and body.endswith('`'):
-#             continue
-
-#         if only_reserve_double_dollar:
-#             m = re.findall('(\$\$[^\$]+\$\$)', body)
-#         else:
-#             m = re.findall('(\$\$?[^\$]+\$?\$)', body)
+        # if body.startswith('`') and body.endswith('`'):
+        #     continue
+        #
+        # if only_reserve_double_dollar:
+        #     m = re.findall('(\$\$[^\$]+\$\$)', body)
+        # else:
+        #     m = re.findall('(\$\$?[^\$]+\$?\$)', body)
 
         if only_reserve_double_dollar:
             m = re.findall('(\`?\$\$[^\$\n]+\$\$\`?)', body)
@@ -788,3 +809,26 @@ def prepare_internal_urls(soup, lang, version):
         )
 
         del link['repo']
+
+
+def _save_menu(menu, menu_path, content_id, original_lang, version):
+    if menu:
+        menu_dir = os.path.dirname(menu_path)
+
+        if not os.path.exists(menu_dir):
+            os.makedirs(menu_dir)
+
+        with open(menu_path, 'w') as menu_file:
+            menu_file.write(json.dumps(menu, indent=4))
+
+        # Because this only happens in production, and we do 'en' above temporarily.
+        if not original_lang:
+            alternative_menu_path = menu_helper.get_production_menu_path(
+                content_id, 'zh', version)
+
+            menu_dir = os.path.dirname(alternative_menu_path)
+
+            if not os.path.exists(menu_dir):
+                os.makedirs(menu_dir)
+
+            copyfile(menu_path, alternative_menu_path)

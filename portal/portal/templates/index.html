@@ -295,6 +295,7 @@
 import paddle
 import paddle.fluid as fluid
 import numpy
+import six
 
 <span class="hljs-comment"># Configure the neural network.</span>
 def net(x, y):
@@ -346,9 +347,9 @@ def infer(save_dirname=None):
             fluid.io.load_inference_model(save_dirname, exe))
         test_reader = paddle.batch(paddle.dataset.uci_housing.test(), batch_size=20)
 
-        test_data = test_reader().next()
-        test_feat = numpy.array(map(lambda x: x[0], test_data)).astype("float32")
-        test_label = numpy.array(map(lambda x: x[1], test_data)).astype("float32")
+        test_data = six.next(test_reader())
+        test_feat = numpy.array(list(map(lambda x: x[0], test_data))).astype("float32")
+        test_label = numpy.array(list(map(lambda x: x[1], test_data))).astype("float32")
 
         results = exe.run(inference_program,
                           feed={feed_target_names[0]: numpy.array(test_feat)},

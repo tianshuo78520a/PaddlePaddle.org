@@ -856,8 +856,7 @@ def _conditionally_preprocess_document(document, soup, path, subpath):
 
             # NOTE: This path might be not unique in the system.
             # Needs to be made tighter in future.
-            print path
-            url_path = path[path.rfind('/docs/'):]
+            url_path = path[path.rfind('documentation/docs/'):]
             content_id, lang, version = url_helper.get_parts_from_url_path(url_path)
 
             # Now add a link on the same DOM wrapper of the heading to include

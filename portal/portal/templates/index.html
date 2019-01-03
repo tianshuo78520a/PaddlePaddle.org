@@ -13,16 +13,6 @@
 
 {% block content %}
 <div class="home">
-    {% if LANGUAGE_CODE == 'zh' %}
-    <section class="survey-banner">
-        <div class="survey-banner-content m-1">
-            <a href="https://iwenjuan.baidu.com/?code=e2my79" target="_blank">深度学习框架及使用场景调研有奖问答</a>
-        </div>
-        <div class="survey-banner-dismiss">
-            <i class="fas fa-times" data-toggle="tooltip" data-placement="right" title="Close"></i>
-        </div>
-    </section>
-    {% endif %}
     <section class="hero-carousel">
         <div id="carousel-controls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -295,6 +285,7 @@
 import paddle
 import paddle.fluid as fluid
 import numpy
+import six
 
 <span class="hljs-comment"># Configure the neural network.</span>
 def net(x, y):
@@ -346,9 +337,9 @@ def infer(save_dirname=None):
             fluid.io.load_inference_model(save_dirname, exe))
         test_reader = paddle.batch(paddle.dataset.uci_housing.test(), batch_size=20)
 
-        test_data = test_reader().next()
-        test_feat = numpy.array(map(lambda x: x[0], test_data)).astype("float32")
-        test_label = numpy.array(map(lambda x: x[1], test_data)).astype("float32")
+        test_data = six.next(test_reader())
+        test_feat = numpy.array(list(map(lambda x: x[0], test_data))).astype("float32")
+        test_label = numpy.array(list(map(lambda x: x[1], test_data))).astype("float32")
 
         results = exe.run(inference_program,
                           feed={feed_target_names[0]: numpy.array(test_feat)},
@@ -876,21 +867,6 @@ if __name__ == "__main__":
         var steps = $('.qr_code');
         steps.removeClass('show');
     });
-
-    var surveyBanner = $('.survey-banner');
-    if (surveyBanner.length){
-        // Slide the survey down on page load (after 1.5 seconds) if the element is found.
-        // setTimeout(function(){
-        //     surveyBanner.slideDown();
-        // }, 1500);
-
-        var surveyClose = $('i', surveyBanner);
-        surveyClose.tooltip();
-
-        surveyClose.click(function(){
-            surveyBanner.slideUp();
-        });
-    }
 
 </script>
 

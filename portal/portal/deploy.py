@@ -855,7 +855,8 @@ def _conditionally_preprocess_document(document, soup, path, subpath):
             api_call.wrap(title_wrapper)
 
             # NOTE: This path might be not unique in the system.
-            url_path = path[path.rfind('/documentation/docs/'):]
+            # Needs to be made tighter in future.
+            url_path = path[path.rfind('/docs/'):]
             content_id, lang, version = url_helper.get_parts_from_url_path(url_path)
 
             # Now add a link on the same DOM wrapper of the heading to include

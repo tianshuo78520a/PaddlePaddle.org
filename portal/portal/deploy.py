@@ -868,7 +868,7 @@ def _conditionally_preprocess_document(document, soup, path, subpath):
                 '/' + url_helper.get_page_url_prefix(content_id, 'en', version)) + (
 
                 # Take everything after the version, and replace '_cn' in it.
-                '/' + '/'.join(url_path.split('/')[5:]).replace('_cn', '')) + (
+                '/' + '/'.join(url_path.split('/')[4:]).replace('_cn', '')) + (
 
                 # This is usually the anchor bit.
                 api_call.find('a')['href']))

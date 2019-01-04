@@ -64,6 +64,19 @@ MathJax.Hub.Config({
         });
     }
 
+    function scrollNavbarBasedOnPage(){
+        var tmpAnchor = document.createElement('a');
+        tmpAnchor.href = window.location.href;
+
+        var navbar = $('#sidebar-nav'),
+            linkSection = $('#sidebar-nav .chapter a[href="' + tmpAnchor.pathname  + '"]').closest('ol');
+
+        if (linkSection.length){
+            // -60 because header.
+            navbar.scrollTop(linkSection[0].offsetTop - 60);
+        }
+    }
+
     (function() {
         $('#sidebar-nav .chapter a[href]').each(function(index) {
             var link = $(this);
@@ -76,6 +89,7 @@ MathJax.Hub.Config({
         // NOTE: Temporarily disabling this, because we do not want
         // to see # being used to determine current page from the menu.
         // highlightSideNavActiveLink();
+        scrollNavbarBasedOnPage();
     })();
 
     $( document ).on( "content-updated", function( event, arg1, arg2 ) {

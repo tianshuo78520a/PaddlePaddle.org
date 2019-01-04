@@ -100,6 +100,10 @@
             return searchItemTemplate(result);
         };
 
+        var sanitizeSnippet = function(snippet){
+            return snippet.replace('¶', '');
+        };
+
         // This finds the best snippet from the text.
         getSnippetFromHTML = function(data){
             var newHiddenDocumentBody = document.createElement('div');
@@ -122,11 +126,13 @@
 
                 } else snippetToShow = rawText.substring(0, 200);
 
-                return (indexOfQuery > 100 ? '&hellip;' : '') + snippetToShow.substring(0, indexOfQuery) + '<strong>' + snippetToShow.substring(
-                    indexOfQuery, indexOfQuery + query.length) + '</strong>' + snippetToShow.substring(indexOfQuery + query.length) + '&hellip;';
+                return (indexOfQuery > 100 ? '&hellip;' : '') + sanitizeSnippet(
+                    snippetToShow.substring(0, indexOfQuery)) + '<strong>' + snippetToShow.substring(
+                    indexOfQuery, indexOfQuery + query.length) + '</strong>' + sanitizeSnippet(
+                    snippetToShow.substring(indexOfQuery + query.length)) + '&hellip;';
             }
 
-            return rawText.substring(0, 200) + '&hellip;';
+            return sanitizeSnippet(rawText.substring(0, 200)) + '&hellip;';
         }
 
         var constructURLForPage = function(pageNumber){

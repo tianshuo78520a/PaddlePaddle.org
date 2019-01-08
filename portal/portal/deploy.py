@@ -69,6 +69,7 @@ def documentation(source_dir, destination_dir, version, original_lang):
     Strip out the static and extract the body contents, ignoring the TOC,
     headers, and body.
     """
+    print sys.modules
     try:
         menu_path = menu_helper.get_menu('docs', original_lang or 'en', version)[1]
     except IOError, e:
@@ -908,6 +909,8 @@ def _conditionally_preprocess_document(document, soup, path, subpath, version):
 
         # Determine the class name.
         current_class = sys.modules['.'.join(['paddle', document.find('h1').contents[0]])]
+
+        print 'Attempting to locate source for: ' + current_class
 
         for api_call in document.find_all(re.compile('^h(1|2|3)')):
             url = _get_repo_source_url_from_api(current_class, api_call, version)

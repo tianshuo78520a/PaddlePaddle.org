@@ -116,7 +116,8 @@ def _find_matching_equivalent_page_for(path, request, lang=None, version=None):
             # HACK: If this is an API lookup, forcefully adapt to the naming
             # convention of api_cn/name_cn (and vice versa) for the paths to seek.
             # This is a result of the Chinese API introduction in v1.2
-            if not old_version < '1.2' and path_to_seek[0].startswith('api/') or path_to_seek[0].startswith('api_'):
+            if not old_version < '1.2' and path_to_seek[0].startswith(
+                'api/') or path_to_seek[0].startswith('api_') and lang:
                 new_path_to_seek = []
 
                 for p2s in list(path_to_seek):

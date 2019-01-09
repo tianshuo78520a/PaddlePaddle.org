@@ -259,7 +259,7 @@ class DocumentationGenerator():
         """
         # Determine if this is an API path, and specifically, if this is a path to
         # Chinese API.
-        if subpath.startswith('/api_cn/') and len(subpath.split('/')) == 3 and (
+        if self.version >= '1.2' and subpath.startswith('/api_cn/') and len(subpath.split('/')) == 3 and (
             subpath.split('/')[-1] != 'index_cn.html'):
 
             # Determine the class name.

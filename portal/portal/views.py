@@ -37,8 +37,8 @@ import requests
 from user_agents import parse
 
 from portal import menu_helper, portal_helper, url_helper
-from deploy import transform
 from portal import url_helper
+from documentation_generator import DocumentationGenerator
 
 
 def change_version(request):
@@ -256,7 +256,8 @@ def _generate_content(source_dir, destination_dir, content_id, lang, version):
         # Generate the directory.
         os.makedirs(destination_dir)
 
-    transform(source_dir, destination_dir, content_id, version, lang)
+    DocumentationGenerator(
+        source_dir, destination_dir, content_id, version, lang).run()
 
 
 def _get_first_link_in_contents(navigation, lang):

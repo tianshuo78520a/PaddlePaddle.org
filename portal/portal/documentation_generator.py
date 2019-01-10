@@ -143,7 +143,7 @@ class DocumentationGenerator():
                         if original_md_path:
                             # If this html file was generated from Sphinx MD, we need to regenerate it using python's
                             # MD library.  Sphinx MD library is limited and doesn't support tables
-                            markdown_file(original_md_path, self.version, '', new_path)
+                            self.markdown_file(original_md_path, self.version, '', new_path)
 
                             # Since we are ignoring SPHINX's generated HTML for MD files (and generating HTML using
                             # python's MD library), we must fix any image links that starts with 'src/'.
@@ -259,56 +259,72 @@ class DocumentationGenerator():
         """
         # Determine if this is an API path, and specifically, if this is a path to
         # Chinese API.
-        if self.version >= '1.2' and subpath.startswith('/api_cn/') and len(subpath.split('/')) == 3 and (
-            subpath.split('/')[-1] != 'index_cn.html'):
+        if self.version >= '1.2' and len(subpath.split('/')) == 3:
+            is_chinese_api = subpath.startswith('/api_cn/')
+            is_english_api = subpath.startswith('/api/')
 
-            # Determine the class name.
-            current_class = sys.modules['.'.join(['paddle', document.find('h1').contents[0]])]
+            if (is_chinese_api or is_english_api) and (
+                subpath.split('/')[-1] not in ['index_cn.html', 'index.html']):
 
-            print 'Finding/building source for: ' + current_class.__file__
+                if is_chinese_api:
+                    # Determine the class name.
+                    current_class = sys.modules['.'.join(['paddle', document.find('h1').contents[0]])]
 
-            for api_call in document.find_all(re.compile('^h(1|2|3)')):
-                url = self._get_repo_source_url_from_api(current_class, api_call)
+                    print 'Finding/building source for: ' + current_class.__file__
 
-                # Create an element that wraps the heading level class or function
-                # name.
-                title_wrapper = soup.new_tag('div')
-                title_wrapper['class'] = 'api-wrapper'
-                api_call.insert_before(title_wrapper)
-                api_call.wrap(title_wrapper)
+                for api_call in document.find_all(re.compile('^h(1|2|3)')):
+                    if is_chinese_api:
+                        url = self._get_repo_source_url_from_api(current_class, api_call)
 
-                # NOTE: This path might be not unique in the system.
-                # Needs to be made tighter in future.
-                url_path = path[path.rfind('documentation/docs/'):]
-                content_id, lang, version = url_helper.get_parts_from_url_path(url_path)
+                    # Create an element that wraps the heading level class or function
+                    # name.
+                    title_wrapper = soup.new_tag('div')
+                    title_wrapper['class'] = 'api-wrapper'
+                    api_call.insert_before(title_wrapper)
+                    api_call.wrap(title_wrapper)
 
-                # Now add a link on the same DOM wrapper of the heading to include
-                # a link to the expected English doc link.
-                lang_source_link_wrapper = soup.new_tag('div')
-                lang_source_link_wrapper['class'] = 'btn-group'
+                    # NOTE: This path might be not unique in the system.
+                    # Needs to be made tighter in future.
+                    url_path = path[path.rfind('documentation/docs/'):]
+                    content_id, lang, version = url_helper.get_parts_from_url_path(url_path)
 
-                # Add a link to the GitHub source.
-                source_link = soup.new_tag('a', href=url)
-                source_link['target'] = '_blank'
-                source_link.string = 'Source'
-                source_link['class'] = 'btn btn-outline-info'
-                lang_source_link_wrapper.append(source_link)
+                    # Now add a link on the same DOM wrapper of the heading to include
+                    # a link to the expected English doc link.
+                    lang_source_link_wrapper = soup.new_tag('div')
+                    lang_source_link_wrapper['class'] = 'btn-group'
 
-                # Add a link to the English docs source.
-                lang_link = soup.new_tag('a', href=(
-                    '/' + url_helper.get_page_url_prefix(content_id, 'en', version)) + (
+                    if is_chinese_api:
+                        # Add a link to the GitHub source.
+                        source_link = soup.new_tag('a', href=url)
+                        source_link['target'] = '_blank'
+                        source_link.string = 'Source'
+                        source_link['class'] = 'btn btn-outline-info'
+                        lang_source_link_wrapper.append(source_link)
 
-                    # Take everything after the version, and replace '_cn' in it.
-                    '/' + '/'.join(url_path.split('/')[4:]).replace('_cn', '')) + (
+                    # Toggle the URL based on which language it can change into.
+                    if is_chinese_api:
+                        page_path = '/'.join(url_path.split('/')[4:-1]) + url_path[-1].replace('_cn', '')
+                    else:
+                         url_path_split = os.path.splitext(url_path)
+                         page_path = '/'.join(url_path_split[0].replace(
+                            '/api/', '/api_cn/').split('/')[4:]) + '_cn' + url_path_split[1]
 
-                    # This is usually the anchor bit.
-                    api_call.find('a')['href']))
+                    # Add a link to the alternative language's docs source.
+                    lang_link = soup.new_tag('a', href=(
+                        '/' + url_helper.get_page_url_prefix(
+                            content_id, 'en'if is_chinese_api else 'zh', version)) + (
 
-                lang_link.string = 'English'
-                lang_link['class'] = 'btn btn-outline-secondary'
-                lang_source_link_wrapper.append(lang_link)
+                        # Take everything after the version, and replace '_cn' in it.
+                        '/' + page_path) + (
 
-                title_wrapper.append(lang_source_link_wrapper)
+                        # This is usually the anchor bit.
+                        api_call.find('a')['href']))
+
+                    lang_link.string = 'English' if is_chinese_api else 'Chinese'
+                    lang_link['class'] = 'btn btn-outline-secondary'
+                    lang_source_link_wrapper.append(lang_link)
+
+                    title_wrapper.append(lang_source_link_wrapper)
 
         return document
 
@@ -376,7 +392,7 @@ class DocumentationGenerator():
 
                         # Preserve all formula
                         formula_map = {}
-                        markdown_body = reserve_formulas(markdown_body, formula_map)
+                        markdown_body = self.reserve_formulas(markdown_body, formula_map)
 
                         with codecs.open(new_path, 'w', 'utf-8') as new_html_partial:
                             # Strip out the wrapping HTML
@@ -563,7 +579,7 @@ class DocumentationGenerator():
                         # them with <span></span>. After the conversion, we put them back.
                         markdown_body = unicode(str(markdown_body), 'utf-8')
                         formula_map = {}
-                        markdown_body = reserve_formulas(markdown_body, formula_map)
+                        markdown_body = self.reserve_formulas(markdown_body, formula_map)
 
                         # NOTE: This ignores the root index files.
                         if len(markdown_body) > 0:
@@ -696,6 +712,81 @@ class DocumentationGenerator():
             raise Exception('Cannot generate documentation, directory %s does not exists.' % self.source_dir)
 
 
+    def markdown_file(self, source_markdown_file, version, tmp_dir, new_path=None):
+        """
+        Given a markdown file path, generate an HTML partial in a directory nested
+        by the path on the URL itself.
+        """
+        if not new_path:
+            new_path = settings.OTHER_PAGE_PATH % (
+                settings.EXTERNAL_TEMPLATE_DIR, version, os.path.splitext(
+                source_markdown_file.replace(tmp_dir, ''))[0] + '.html')
+
+        # Create the nested directories if they don't exist.
+        if not os.path.exists(os.path.dirname(new_path)):
+            os.makedirs(os.path.dirname(new_path))
+
+        with open(source_markdown_file) as original_md_file:
+            markdown_body = sanitize_markdown(original_md_file.read())
+
+            # Preserve all formula
+            formula_map = {}
+            markdown_body = self.reserve_formulas(markdown_body, formula_map)
+
+            with codecs.open(new_path, 'w', 'utf-8') as new_html_partial:
+                converted_content = markdown.markdown(
+                    unicode(markdown_body, 'utf-8'),
+                    extensions=MARKDOWN_EXTENSIONS
+                )
+
+                soup = BeautifulSoup(converted_content, 'lxml')
+
+                # Insert the preserved formulas
+                markdown_equation_placeholders = soup.select('.markdown-equation')
+                for equation in markdown_equation_placeholders:
+                    equation.string = formula_map[equation.get('id')]
+
+                # Strip out the wrapping HTML
+                new_html_partial.write(
+                    '{% verbatim %}\n' + unicode(
+                        str(soup.select('body')[0])[6:-7], 'utf-8'
+                    ) + '\n{% endverbatim %}'
+                )
+
+
+    def reserve_formulas(self, markdown_body, formula_map, only_reserve_double_dollar=False):
+        """
+        Store the math formulas to formula_map before markdown conversion
+        """
+        place_holder = '<span class="markdown-equation" id="equation-%s"></span>'
+
+
+        markdown_body_list = markdown_body.split('\n')
+
+        math = []
+        for i in range(len(markdown_body_list)):
+            body = markdown_body_list[i].strip(' ')
+            # if body.startswith('`') and body.endswith('`'):
+            #     continue
+            #
+            # if only_reserve_double_dollar:
+            #     m = re.findall('(\$\$[^\$]+\$\$)', body)
+            # else:
+            #     m = re.findall('(\$\$?[^\$]+\$?\$)', body)
+
+            if only_reserve_double_dollar:
+                m = re.findall('(\`?\$\$[^\$\n]+\$\$\`?)', body)
+            else:
+                m = re.findall('(\`?\$\$?[^\$\n]+\$?\$\`?)', body)
+            math += m
+
+        for i in xrange(len(math)):
+            formula_map['equation-' + str(i)] = math[i].strip('`')
+            markdown_body = markdown_body.replace(math[i], place_holder % i)
+
+        return markdown_body
+
+
     def run(self):
         print 'Processing docs at %s to %s' % (
             self.source_dir, self.destination_dir)
@@ -717,48 +808,6 @@ def _get_new_generated_dir(content_id, lang=None):
             generated_dir = tempfile.mkdtemp()
 
     return generated_dir
-
-
-def markdown_file(source_markdown_file, version, tmp_dir, new_path=None):
-    """
-    Given a markdown file path, generate an HTML partial in a directory nested
-    by the path on the URL itself.
-    """
-    if not new_path:
-        new_path = settings.OTHER_PAGE_PATH % (
-            settings.EXTERNAL_TEMPLATE_DIR, version, os.path.splitext(
-            source_markdown_file.replace(tmp_dir, ''))[0] + '.html')
-
-    # Create the nested directories if they don't exist.
-    if not os.path.exists(os.path.dirname(new_path)):
-        os.makedirs(os.path.dirname(new_path))
-
-    with open(source_markdown_file) as original_md_file:
-        markdown_body = sanitize_markdown(original_md_file.read())
-
-        # Preserve all formula
-        formula_map = {}
-        markdown_body = reserve_formulas(markdown_body, formula_map)
-
-        with codecs.open(new_path, 'w', 'utf-8') as new_html_partial:
-            converted_content = markdown.markdown(
-                unicode(markdown_body, 'utf-8'),
-                extensions=MARKDOWN_EXTENSIONS
-            )
-
-            soup = BeautifulSoup(converted_content, 'lxml')
-
-            # Insert the preserved formulas
-            markdown_equation_placeholders = soup.select('.markdown-equation')
-            for equation in markdown_equation_placeholders:
-                equation.string = formula_map[equation.get('id')]
-
-            # Strip out the wrapping HTML
-            new_html_partial.write(
-                '{% verbatim %}\n' + unicode(
-                    str(soup.select('body')[0])[6:-7], 'utf-8'
-                ) + '\n{% endverbatim %}'
-            )
 
 
 def sanitize_markdown(markdown_body):
@@ -823,36 +872,3 @@ def _update_link_path(link_path, md_extension):
         link_path += md_extension
 
     return link_path
-
-
-def reserve_formulas(markdown_body, formula_map, only_reserve_double_dollar=False):
-    """
-    Store the math formulas to formula_map before markdown conversion
-    """
-    place_holder = '<span class="markdown-equation" id="equation-%s"></span>'
-
-
-    markdown_body_list = markdown_body.split('\n')
-
-    math = []
-    for i in range(len(markdown_body_list)):
-        body = markdown_body_list[i].strip(' ')
-        # if body.startswith('`') and body.endswith('`'):
-        #     continue
-        #
-        # if only_reserve_double_dollar:
-        #     m = re.findall('(\$\$[^\$]+\$\$)', body)
-        # else:
-        #     m = re.findall('(\$\$?[^\$]+\$?\$)', body)
-
-        if only_reserve_double_dollar:
-            m = re.findall('(\`?\$\$[^\$\n]+\$\$\`?)', body)
-        else:
-            m = re.findall('(\`?\$\$?[^\$\n]+\$?\$\`?)', body)
-        math += m
-
-    for i in xrange(len(math)):
-        formula_map['equation-' + str(i)] = math[i].strip('`')
-        markdown_body = markdown_body.replace(math[i], place_holder % i)
-
-    return markdown_body

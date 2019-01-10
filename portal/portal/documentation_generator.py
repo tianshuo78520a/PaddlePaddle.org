@@ -305,7 +305,7 @@ class DocumentationGenerator():
                     if is_chinese_api:
                         url_path_parts = url_path.split('/')
                         page_path = os.path.join(
-                            os.path.join(url_path_parts[4:-1]).replace(
+                            os.path.join(*url_path_parts[4:-1]).replace(
                                '/api_cn/', '/api/'),
                             url_path_parts[-1].replace('_cn', '')
                         )

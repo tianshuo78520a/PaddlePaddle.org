@@ -303,7 +303,12 @@ class DocumentationGenerator():
 
                     # Toggle the URL based on which language it can change into.
                     if is_chinese_api:
-                        page_path = '/'.join(url_path.split('/')[4:-1]) + url_path[-1].replace('_cn', '')
+                        url_path_parts = url_path.split('/')
+                        page_path = os.path.join(
+                            os.path.join(url_path_parts[4:-1]).replace(
+                               '/api_cn/', '/api/'),
+                            url_path_parts[-1].replace('_cn', '')
+                        )
                     else:
                          url_path_split = os.path.splitext(url_path)
                          page_path = '/'.join(url_path_split[0].replace(

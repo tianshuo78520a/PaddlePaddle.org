@@ -3,7 +3,7 @@ from shutil import copyfile
 
 from django.core.management import BaseCommand
 
-from documentation_generator import DocumentationGenerator
+from portal.documentation_generator import DocumentationGenerator
 from portal import menu_helper, url_helper
 from .utils import sanitize_version
 

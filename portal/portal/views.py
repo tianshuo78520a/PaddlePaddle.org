@@ -38,7 +38,7 @@ from user_agents import parse
 
 from portal import menu_helper, portal_helper, url_helper
 from portal import url_helper
-from documentation_generator import DocumentationGenerator
+from portal.documentation_generator import DocumentationGenerator
 
 
 def change_version(request):

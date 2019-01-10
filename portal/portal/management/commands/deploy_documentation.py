@@ -86,7 +86,7 @@ class Command(BaseCommand):
 
             DocumentationGenerator(
                 source_dir, options.get('destination_dir', None),
-                content_id, version, None, options['version'][0]
+                content_id, options['version'][0], None
             ).run()
 
             # Added docs and visualdl ever since we started saving the menu

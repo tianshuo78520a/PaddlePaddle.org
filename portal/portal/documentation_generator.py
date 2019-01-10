@@ -106,7 +106,7 @@ class DocumentationGenerator():
             if self.lang:
                 lang_destination_dir = destination_dir
             else:
-                lang_destination_dir = os.path.join(destination_dir, 'docs', lang, version)
+                lang_destination_dir = os.path.join(destination_dir, 'docs', lang, self.version)
 
             self.strip_sphinx_documentation(lang, lang_destination_dir)
             # shutil.rmtree(generated_dir)

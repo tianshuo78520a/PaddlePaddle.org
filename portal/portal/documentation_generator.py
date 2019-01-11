@@ -306,7 +306,7 @@ class DocumentationGenerator():
                         url_path_parts = url_path.split('/')
                         page_path = os.path.join(
                             os.path.join(*url_path_parts[4:-1]).replace(
-                               '/api_cn/', '/api/'),
+                               'api_cn', 'api'),
                             url_path_parts[-1].replace('_cn', '')
                         )
                     else:

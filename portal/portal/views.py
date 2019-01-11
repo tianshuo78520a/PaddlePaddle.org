@@ -37,8 +37,8 @@ import requests
 from user_agents import parse
 
 from portal import menu_helper, portal_helper, url_helper
-from deploy import transform
 from portal import url_helper
+from portal.documentation_generator import DocumentationGenerator
 
 
 def change_version(request):
@@ -116,7 +116,8 @@ def _find_matching_equivalent_page_for(path, request, lang=None, version=None):
             # HACK: If this is an API lookup, forcefully adapt to the naming
             # convention of api_cn/name_cn (and vice versa) for the paths to seek.
             # This is a result of the Chinese API introduction in v1.2
-            if not old_version < '1.2' and path_to_seek[0].startswith('api/') or path_to_seek[0].startswith('api_'):
+            if not old_version < '1.2' and path_to_seek[0].startswith(
+                'api/') or path_to_seek[0].startswith('api_') and lang:
                 new_path_to_seek = []
 
                 for p2s in list(path_to_seek):
@@ -256,7 +257,8 @@ def _generate_content(source_dir, destination_dir, content_id, lang, version):
         # Generate the directory.
         os.makedirs(destination_dir)
 
-    transform(source_dir, destination_dir, content_id, version, lang)
+    DocumentationGenerator(
+        source_dir, destination_dir, content_id, version, lang).run()
 
 
 def _get_first_link_in_contents(navigation, lang):
@@ -650,3 +652,7 @@ def ip_in_internal_range(ip_to_check):
 
 def enterprise_survey(request):
     return redirect('https://cloud.baidu.com/survey/EnterprisecooperationApply.html')
+
+
+def parl(request):
+    return redirect('http://ai.baidu.com/paddle/ModalPARL')

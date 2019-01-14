@@ -213,13 +213,13 @@ class DocumentationGenerator():
 
         if api_call.name == 'h1':
             # The -1 prevents us from the c in .pyc
-            module = current_class.__file__[:-1]
+            module = os.path.splitext(current_class.__file__)[0] + '.py'
 
         else:
             api = getattr(current_class, api_title)
 
             if type(api).__name__ == 'module':
-                module = api.__file__[:-1]
+                module = os.path.splitext(api.__file__)[0] + '.py'
             else:
                 node_definition = ast.ClassDef if inspect.isclass(api) else ast.FunctionDef
 

@@ -241,7 +241,7 @@ class DocumentationGenerator():
                                     line_no = node.lineno
                                     break
                 else:
-                    module = current_class.__file__[:-1]
+                    module = os.path.splitext(current_class.__file__)[0] + '.py'
 
         url = self.GITHUB_REPO_URL + os.path.join(
             self.raw_version, module[module.rfind('python/paddle'):])

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-15 18:04+0000\n"
+"POT-Creation-Date: 2019-01-28 19:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,11 +52,11 @@ msgstr "启动paddlepaddle.org文档查看器"
 msgid "Downloading latest documentation, this could take several minutes..."
 msgstr ""
 
-#: portal/settings.py:191
+#: portal/settings.py:195
 msgid "English"
 msgstr ""
 
-#: portal/settings.py:192
+#: portal/settings.py:196
 msgid "Chinese"
 msgstr ""
 
@@ -70,7 +70,7 @@ msgid ""
 "moved. Please return back to"
 msgstr "您可能输错了网址，或该网页已经删除或移动，请您返回"
 
-#: portal/templates/404.html:12 portal/templates/_nav_bar.html:22
+#: portal/templates/404.html:12 portal/templates/_nav_bar.html:26
 #: visualDL/templates/visualdl/_nav_bar.html:17
 msgid "Documentation"
 msgstr "使用文档"
@@ -79,24 +79,24 @@ msgstr "使用文档"
 msgid "PaddlePaddle - Train and deploy deep learning at scale"
 msgstr "PaddlePaddle-百度自主研发的适合中国企业和开发者的深度学习平台"
 
-#: portal/templates/_nav_bar.html:26
+#: portal/templates/_nav_bar.html:35
 msgid "About"
 msgstr "关于我们"
 
-#: portal/templates/_nav_bar.html:31
+#: portal/templates/_nav_bar.html:72
 msgid "Community"
 msgstr "社区"
 
-#: portal/templates/_nav_bar.html:42
+#: portal/templates/_nav_bar.html:83
 msgid "Refresh Content"
 msgstr "刷新内容"
 
-#: portal/templates/index.html:20
+#: portal/templates/index.html:34
 msgid ""
 "An easy-to-use, easy-to-learn&nbsp;<br class=\"br\"/>deep learning platform"
-msgstr "适合中国开发者和企业的深度学习框架"
+msgstr "真正源于产业实践的深度学习框架"
 
-#: portal/templates/index.html:21
+#: portal/templates/index.html:36
 msgid ""
 "An open-source deep learning platform with a&nbsp;<br class=\"br\"/>simple "
 "API, trusted by the world’s leading AI teams"
@@ -104,43 +104,43 @@ msgstr ""
 "PaddlePaddle是一个易学、易用的开源深度学习框架，<br class=\"br\"/>能够让开发"
 "者和企业安全、高效地实现自己的AI想法"
 
-#: portal/templates/index.html:24 portal/templates/index.html:206
+#: portal/templates/index.html:39 portal/templates/index.html.py:255
 msgid "Get Started"
 msgstr "让我们开始吧"
 
-#: portal/templates/index.html:26 portal/templates/index.html:363
-#: portal/templates/index.html:385 portal/templates/index.html:411
-#: portal/templates/index.html:433 portal/templates/index.html:459
-#: portal/templates/index.html:480
+#: portal/templates/index.html:44 portal/templates/index.html.py:415
+#: portal/templates/index.html:437 portal/templates/index.html.py:463
+#: portal/templates/index.html:485 portal/templates/index.html.py:511
+#: portal/templates/index.html:532
 msgid "Learn more"
 msgstr "了解更多"
 
-#: portal/templates/index.html:100
+#: portal/templates/index.html:152
 msgid "Easy to learn"
 msgstr "易学"
 
-#: portal/templates/index.html:102
+#: portal/templates/index.html:154
 msgid ""
 "PaddlePaddle provides multitudes of tools and tutorials; Become a deep "
 "learning developer in no time."
 msgstr ""
 "代码易于理解，官方提供丰富的学习资料及工具；帮助你迅速成为深度学习开发者"
 
-#: portal/templates/index.html:108
+#: portal/templates/index.html:160
 msgid "Ease of use"
 msgstr "易用"
 
-#: portal/templates/index.html:110
+#: portal/templates/index.html:162
 msgid ""
 "PaddlePaddle provides an intuitive and flexible interface for loading data "
 "and specifying model structures; Bring your creativity to reality."
 msgstr "框架具备非常好的拓展性，并且提供了丰富全面的API；实现你天马行空的创意"
 
-#: portal/templates/index.html:116
+#: portal/templates/index.html:168
 msgid "Security"
 msgstr "安全"
 
-#: portal/templates/index.html:118
+#: portal/templates/index.html:170
 msgid ""
 "PaddlePaddle is backed by Baidu’s AI technology and business practices. The "
 "framework is safe and stable. Focus your works and not worries."
@@ -148,11 +148,11 @@ msgstr ""
 "基于百度多年的AI技术积累以及大量的业务使用验证，框架安全稳定；替你免除后顾之"
 "忧"
 
-#: portal/templates/index.html:124
+#: portal/templates/index.html:176
 msgid "Efficiency"
 msgstr "高效"
 
-#: portal/templates/index.html:126
+#: portal/templates/index.html:178
 msgid ""
 "It also provides extremely optimized operations, memory, and network "
 "communication. Kick start your projects in no time with the latest Baidu "
@@ -161,11 +161,11 @@ msgstr ""
 "框架能够一键安装，针对CPU、GPU都做了众多优化，分布式性能强劲，并且开放多种百"
 "度优势业务模型；让你的开发快人一步"
 
-#: portal/templates/index.html:138
+#: portal/templates/index.html:189
 msgid "Install"
 msgstr "安装"
 
-#: portal/templates/index.html:141
+#: portal/templates/index.html:191
 msgid ""
 "Get PaddlePaddle up and running quick after installing the newest version of "
 "<a href='https://pip.pypa.io/en/stable/installing/'>pip</a>"
@@ -173,7 +173,7 @@ msgstr ""
 "推荐在Linux系统下使用最新版的 <a href='https://pip.pypa.io/en/stable/"
 "installing/' target=\"_blank\">pip</a> 快捷地安装和运行 PaddlePaddle"
 
-#: portal/templates/index.html:193
+#: portal/templates/index.html:243
 msgid ""
 "Tested on <a href=https://wiki.centos.org/Download>CentOS 6</a>, <a "
 "href=https://www.ubuntu.com/download>Ubuntu 14.04</a>+"
@@ -181,75 +181,81 @@ msgstr ""
 "请确保你的系统版本满足：<a href=https://wiki.centos.org/Download>CentOS 6</"
 "a> 以上，<a href=https://www.ubuntu.com/download>Ubuntu 14.04 </a>以上"
 
-#: portal/templates/index.html:198
+#: portal/templates/index.html:248
 msgid "Install on Windows, MacOS, or other options"
 msgstr "在Windows，MacOS以及其他平台上安装"
 
-#: portal/templates/index.html:215
+#: portal/templates/index.html:257
+msgid ""
+"This example has been written for Python 2.7 specifically. Note that "
+"PaddlePaddle also officially supports Python 3.5/3.6/3.7."
+msgstr "以下代码适用于Python 2.7，PaddlePaddle现在也已支持Python 3.5/3.6/3.7版本，请阅读安装文档了解详情"
+
+#: portal/templates/index.html:266
 msgid "Configure the network"
 msgstr "导入PaddlePaddle，配置网络"
 
-#: portal/templates/index.html:224
+#: portal/templates/index.html:275
 msgid "Define train & infer functions"
 msgstr "定义训练和预测函数"
 
-#: portal/templates/index.html:233
+#: portal/templates/index.html:284
 msgid "Train and make a prediction"
 msgstr "执行训练和预测"
 
-#: portal/templates/index.html:331
+#: portal/templates/index.html:383
 msgid "Build powerful applications with PaddlePaddle"
 msgstr "用PaddlePaddle构建强大的应用"
 
-#: portal/templates/index.html:356
+#: portal/templates/index.html:408
 msgid "Word2Vec"
 msgstr "词向量"
 
-#: portal/templates/index.html:359
+#: portal/templates/index.html:411
 msgid "Express words as real vectors to calculate similarities between them."
 msgstr ""
 "能够将词表示成一个实数向量(one-hot vector), 从而能够进行词与词之间的计算"
 
-#: portal/templates/index.html:378
+#: portal/templates/index.html:430
 msgid "Recommender System"
 msgstr "个性化推荐"
 
-#: portal/templates/index.html:381
+#: portal/templates/index.html:433
 msgid ""
 "Recommend potentially interesting information or commodities to users based "
 "on their features."
 msgstr "根据不同用户个性化需求与兴趣推荐其可能感兴趣的信息或商品"
 
-#: portal/templates/index.html:404
+#: portal/templates/index.html:456
 msgid "Understand Sentiment"
 msgstr "情感分析"
 
-#: portal/templates/index.html:407
+#: portal/templates/index.html:459
 msgid ""
 "Predict the emotion expressed in a piece of text as positive or negative."
 msgstr "可以用来判断一段文本所表达的情绪状态，比如正面、负面"
 
-#: portal/templates/index.html:426
+#: portal/templates/index.html:478
 msgid "Image Classification"
 msgstr "图像分类"
 
-#: portal/templates/index.html:429
+#: portal/templates/index.html:481
 msgid "Classify images based on their semantic information."
 msgstr "能够根据图像所传达的语义信息将图像按类别进行区分"
 
-#: portal/templates/index.html:452
+#: portal/templates/index.html:504
 msgid "Machine Translation"
 msgstr "机器翻译"
 
-#: portal/templates/index.html:455
+#: portal/templates/index.html:507
 msgid "Translate between different languages via deep learning."
 msgstr "通过深度学习方法实现不同语言之间的转换"
 
-#: portal/templates/index.html:473
+#: portal/templates/index.html:525
 msgid "SSD Object Detection"
 msgstr "SSD目标检测"
 
-#: portal/templates/index.html:476
+#: portal/templates/index.html:528
 msgid "Use the SSD model in PaddlePaddle for object detection."
 msgstr "使用PaddlePaddle的SSD模型来做物体探测"
 

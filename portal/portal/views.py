@@ -27,7 +27,7 @@ from django.template.loader import get_template
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.utils.six.moves.urllib.parse import unquote
-from django.http import Http404, HttpResponse, HttpResponseServerError
+from django.http import Http404, HttpResponse, HttpResponseServerError, HttpResponseBadRequest
 from django.views import static
 from django.template import TemplateDoesNotExist
 from django.core.cache import cache
@@ -35,6 +35,7 @@ from django.http import JsonResponse
 from django import forms
 import requests
 from user_agents import parse
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from portal import menu_helper, portal_helper, url_helper
 from portal import url_helper
@@ -370,15 +371,19 @@ def _get_static_content_from_template(path):
     except TemplateDoesNotExist:
         return None
 
+
+@ensure_csrf_cookie
 def home_root(request):
     return render(request, 'index.html')
 
 
+@ensure_csrf_cookie
 def en_home_root(request):
     portal_helper.set_preferred_language(request, None, 'en')
     return render(request, 'index.html')
 
 
+@ensure_csrf_cookie
 def zh_home_root(request):
     portal_helper.set_preferred_language(request, None, 'zh')
     return render(request, 'index.html')
@@ -534,6 +539,9 @@ def contact(request):
     phone = request.POST.get('phone', None)
     email = request.POST.get('email', None)
     reason = request.POST.get('reason', None)
+
+    if not name or not phone or not email or not reason:
+        return HttpResponseBadRequest()
 
     # Datetime in Beijing time.
     beijing_timezone = pytz.timezone('Asia/Shanghai')

@@ -2,7 +2,8 @@ var fs = require('fs'),
     http = require('http'),
     url = require('url'),
     qs = require('querystring'),
-    lunr = require('./portal/static/js/lunr');
+    lunr = require('./portal/static/js/lunr'),
+    stream = fs.createWriteStream('search-log');
 
 var indexesPath = process.argv[2];
     indexes = { en: {}, zh: {} };
@@ -17,6 +18,9 @@ function onRequest(request, response) {
                 parsedQuery = qs.parse(parsed_url.query),
                 version = parsedQuery.version,
                 language = parsedQuery.lang;
+
+            // Log search terms.
+            stream.write(parsedQuery.q + '\n');
 
             if (!indexes[language].hasOwnProperty(version)){
                 var index = require([indexesPath, language, version, 'index'].join('/'));

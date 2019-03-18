@@ -114,7 +114,8 @@ class DocumentationGenerator():
         if new_menu:
             self.save_menu(new_menu, menu_path)
         else:
-            sphinx_utils.remove_sphinx_menu(menu_path, lang)
+            for lang in (['en', 'zh'] if settings.ENV in ['production', 'staging'] else langs):
+                sphinx_utils.remove_sphinx_menu(menu_path, lang)
 
 
     def strip_sphinx_documentation(self, lang, lang_destination_dir):
@@ -698,7 +699,7 @@ class DocumentationGenerator():
                         )
 
                 for lang in langs:
-                    if original_lang:
+                    if self.lang:
                         lang_destination_dir = destination_dir
                     else:
                         lang_destination_dir = os.path.join(
@@ -709,7 +710,8 @@ class DocumentationGenerator():
                 if new_menu:
                     self.save_menu(new_menu, menu_path)
                 else:
-                    sphinx_utils.remove_sphinx_menu(menu_path, lang)
+                    for lang in (['en', 'zh'] if settings.ENV in ['production', 'staging'] else langs):
+                        sphinx_utils.remove_sphinx_menu(menu_path, lang)
 
             else:
                 raise Exception('Cannot find script located at %s.' % script_path)

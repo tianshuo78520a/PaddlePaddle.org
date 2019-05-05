@@ -208,6 +208,7 @@ class DocumentationGenerator():
 
 
     def _get_repo_source_url_from_api(self, current_class, api_call):
+        return 'http://paddlepaddle.org'
         line_no = None
 
         api_title = api_call.contents[0]
